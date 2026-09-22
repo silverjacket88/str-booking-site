@@ -231,59 +231,48 @@ export const ownerRezPmsAdapter: PmsAdapter = {
   },
 
   async createBooking(request: BookingRequest): Promise<BookingConfirmation> {
-    // Embed OwnerRez's own Inquiry/Booking widget directly (via iframe) on
-    // this site's confirmation step, instead of redirecting guests to each
-    // cabin's separate marketing domain. Same underlying OwnerRez checkout
-    // (still PCI-safe — payment happens inside OwnerRez's own iframe, never
-    // touching this app), but the guest never appears to leave this site.
+    // REVERTED from an iframe-embedded checkout back to a plain redirect.
     //
-    // widgetId/propertyKey below were read directly out of each cabin's own
-    // existing site's embedded widget (view-source on their /book page) —
-    // confirmed the widget's host, app.ownerrez.com, sends no
-    // X-Frame-Options/frame-ancestors restriction, so embedding it
-    // cross-domain here is not blocked.
+    // The embed version (still in git history if worth revisiting) got the
+    // guest all the way through OwnerRez's own widget — booking created,
+    // "Booking prepared!" shown — but then hung forever on "Redirecting to
+    // checkout...". Real testing (console + network tab, not guessing)
+    // showed every network request succeeding, meaning the freeze is the
+    // browser itself silently blocking the widget's attempt to navigate
+    // the guest out of a cross-origin iframe to a payment page. Two
+    // Permissions-Policy attempts didn't fix it. This is squarely in
+    // "needs OwnerRez support to confirm what they support" territory, not
+    // something to keep guessing at from this side — especially for the
+    // one step where a bug costs a real booking.
     //
-    // or_arrival/or_departure/or_adults all confirmed prefilling correctly
-    // when embedded this way (tested live). They did NOT prefill when
-    // testing via each cabin's own existing WordPress site — that's the
-    // "double iframe" issue OwnerRez's docs warn about (WordPress wraps
-    // their embed snippet in an extra iframe layer, which blocks the
-    // widget from reading its own URL params). Embedding a single clean
-    // iframe directly, as done here, avoids that problem entirely.
-    const widgets: Record<string, { widgetId: string; propertyKey: string }> = {
-      "411998": {
-        widgetId: "8803317455f741e89a289c1c38a7049a",
-        propertyKey: "2e573ca29680483b956f01634ee15081",
-      },
-      "480455": {
-        widgetId: "acc8b0a60b9d4aa38e5174a013f798ee",
-        propertyKey: "6e8229a102f94317a7eb02acceb90675",
-      },
-      "361555": {
-        widgetId: "bbc7ea996a994981bfe1f786bdbc0411",
-        propertyKey: "4a53f63795f04414b14eb3d6bb6b5b0c",
-      },
+    // So: redirect to each cabin's own real, already-working booking site
+    // instead. or_adults prefills correctly there; or_arrival/or_departure
+    // do not (a separate, known issue — their WordPress embed double-wraps
+    // the widget in an iframe, which blocks it from reading its own URL
+    // params). Guests re-enter dates once. Not seamless, but proven to
+    // actually complete a real booking, which the embed version was not.
+    const directBookingSites: Record<string, string> = {
+      "411998": "https://www.takemetotheriver.us/book",
+      "480455": "https://www.chasingsunsetcabin.com/book",
+      "361555": "https://www.thewthcabin.com/book",
     };
 
-    const widget = widgets[request.propertyId];
-    if (!widget) {
+    const base = directBookingSites[request.propertyId];
+    if (!base) {
       throw new Error(
-        `No OwnerRez widget configured for property ${request.propertyId}. Add it to the widgets map in lib/pms/ownerrez.ts.`
+        `No direct-booking site configured for OwnerRez property ${request.propertyId}. Add it to directBookingSites in lib/pms/ownerrez.ts.`
       );
     }
 
-    const widgetUrl = new URL(
-      `https://app.ownerrez.com/widgets/${widget.widgetId}`
-    );
-    widgetUrl.searchParams.set("propertyKey", widget.propertyKey);
-    widgetUrl.searchParams.set("or_arrival", request.checkIn);
-    widgetUrl.searchParams.set("or_departure", request.checkOut);
-    widgetUrl.searchParams.set("or_adults", String(request.guests));
+    const bookUrl = new URL(base);
+    bookUrl.searchParams.set("or_arrival", request.checkIn);
+    bookUrl.searchParams.set("or_departure", request.checkOut);
+    bookUrl.searchParams.set("or_adults", String(request.guests));
 
     return {
-      bookingId: widgetUrl.toString(),
+      bookingId: bookUrl.toString(),
       status: "pending_payment",
-      confirmationCode: "EMBED",
+      confirmationCode: "REDIRECT",
     };
   },
 };
