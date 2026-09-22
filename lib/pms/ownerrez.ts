@@ -231,14 +231,31 @@ export const ownerRezPmsAdapter: PmsAdapter = {
   },
 
   async createBooking(request: BookingRequest): Promise<BookingConfirmation> {
-    // Recommended default: hand off to OwnerRez's own hosted checkout for
-    // payment rather than collecting card data on this site. OwnerRez's
-    // API does expose POST /v2/bookings for creating bookings directly —
-    // if you want that flow instead, confirm with OwnerRez how payment
-    // capture works for API-created bookings first.
-    const bookUrl = new URL(
-      `https://secure.ownerreservations.com/book/${request.propertyId}`
-    );
+    // Hand off to each cabin's own existing, already-live OwnerRez-powered
+    // direct-booking site for payment, rather than collecting card data on
+    // this site or guessing at a generic checkout URL. (OwnerRez's own
+    // "Creating Quotes and Bookings" doc describes a guest+quote API flow
+    // that returns a "PaymentForm" URL, but the live v2 Quotes response we
+    // tested does not actually include that field — confirmed by creating
+    // a real guest + quote against this account. Rather than guess at
+    // undocumented behavior for a payment redirect, we use the real,
+    // already-working per-cabin sites below instead. Worth following up
+    // with OwnerRez support directly if a fully API-driven checkout is
+    // wanted later.)
+    const directBookingSites: Record<string, string> = {
+      "411998": "https://www.takemetotheriver.us/book",
+      "480455": "https://www.chasingsunsetcabin.com/book",
+      "361555": "https://www.thewthcabin.com/book",
+    };
+
+    const base = directBookingSites[request.propertyId];
+    if (!base) {
+      throw new Error(
+        `No direct-booking site configured for OwnerRez property ${request.propertyId}. Add it to directBookingSites in lib/pms/ownerrez.ts.`
+      );
+    }
+
+    const bookUrl = new URL(base);
     bookUrl.searchParams.set("arrival", request.checkIn);
     bookUrl.searchParams.set("departure", request.checkOut);
     bookUrl.searchParams.set("adults", String(request.guests));

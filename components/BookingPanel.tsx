@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Property } from "@/lib/types";
-import { Quote } from "@/lib/pms/types";
+import { BookingConfirmation, Quote } from "@/lib/pms/types";
 import AvailabilityCalendar from "@/components/AvailabilityCalendar";
 
 export default function BookingPanel({ property }: { property: Property }) {
@@ -10,7 +10,7 @@ export default function BookingPanel({ property }: { property: Property }) {
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);
   const [showReserveForm, setShowReserveForm] = useState(false);
-  const [confirmation, setConfirmation] = useState<string | null>(null);
+  const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const hasDates = Boolean(checkIn && checkOut);
@@ -53,8 +53,8 @@ export default function BookingPanel({ property }: { property: Property }) {
           guestPhone: formData.get("phone"),
         }),
       });
-      const data = await res.json();
-      setConfirmation(data.confirmationCode ?? "Request received");
+      const data: BookingConfirmation = await res.json();
+      setConfirmation(data);
     } finally {
       setSubmitting(false);
     }
@@ -129,12 +129,29 @@ export default function BookingPanel({ property }: { property: Property }) {
         ) : null}
       </div>
 
-      {confirmation ? (
+      {confirmation && confirmation.confirmationCode === "REDIRECT" ? (
+        <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
+          <p className="font-medium">Almost there.</p>
+          <p className="mt-1">
+            One last step: confirm your dates and pay securely on our booking partner&apos;s
+            checkout page.
+          </p>
+          <a
+            href={confirmation.bookingId}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
+          >
+            Continue to secure checkout →
+          </a>
+        </div>
+      ) : confirmation ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
           <p className="font-medium">Request received.</p>
           <p className="mt-1">
-            Confirmation reference: <span className="font-mono">{confirmation}</span>. In
-            production this hands off to your PMS&apos;s secure checkout to collect payment.
+            Confirmation reference:{" "}
+            <span className="font-mono">{confirmation.confirmationCode}</span>. We&apos;ll be
+            in touch shortly to finalize payment.
           </p>
         </div>
       ) : showReserveForm ? (

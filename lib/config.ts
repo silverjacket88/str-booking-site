@@ -9,10 +9,9 @@ export const siteConfig = {
     "Alderford Homes started with one cabin and a simple idea: keep it small enough that we know every guest's name and every squeaky stair in every house.",
     "We're not trying to manage a hundred cabins across ten states. We manage three, in one town, and we know them better than anyone. That's the whole model.",
   ],
-  supportPhoneDisplay: "(865) 555-0142",
+  supportPhoneDisplay: "(865) 214-6377",
   // Digits only, country code first, no symbols — used to build wa.me chat links.
-  // Placeholder number: replace with your real WhatsApp Business number.
-  whatsappNumber: "18655550142",
+  whatsappNumber: "18652146377",
   supportEmail: "stay@alderfordhomes.com",
   ownerEmail: "owners@alderfordhomes.com",
   stats: {
