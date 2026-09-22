@@ -40,10 +40,13 @@ export interface Quote {
   unavailableReason?: string;
 }
 
+// Guest contact fields are optional here: the OwnerRez adapter hands off to
+// an embedded checkout widget that collects name/email/phone itself, so
+// this site never needs to ask for (or relay) that information twice.
 export interface BookingRequest extends QuoteRequest {
-  guestName: string;
-  guestEmail: string;
-  guestPhone: string;
+  guestName?: string;
+  guestEmail?: string;
+  guestPhone?: string;
 }
 
 export interface BookingConfirmation {

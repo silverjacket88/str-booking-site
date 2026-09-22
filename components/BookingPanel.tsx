@@ -9,7 +9,6 @@ export default function BookingPanel({ property }: { property: Property }) {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);
-  const [showReserveForm, setShowReserveForm] = useState(false);
   const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -35,23 +34,13 @@ export default function BookingPanel({ property }: { property: Property }) {
     };
   }, [hasDates, requestKey, checkIn, checkOut, guests, property.id]);
 
-  async function handleReserve(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+  async function handleReserve() {
     setSubmitting(true);
     try {
       const res = await fetch("/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          propertyId: property.id,
-          checkIn,
-          checkOut,
-          guests,
-          guestName: formData.get("name"),
-          guestEmail: formData.get("email"),
-          guestPhone: formData.get("phone"),
-        }),
+        body: JSON.stringify({ propertyId: property.id, checkIn, checkOut, guests }),
       });
       const data: BookingConfirmation = await res.json();
       setConfirmation(data);
@@ -150,42 +139,14 @@ export default function BookingPanel({ property }: { property: Property }) {
             in touch shortly to finalize payment.
           </p>
         </div>
-      ) : showReserveForm ? (
-        <form onSubmit={handleReserve} className="mt-6 space-y-3">
-          <input
-            name="name"
-            required
-            placeholder="Full name"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm focus:border-forest focus:outline-none"
-          />
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="Email"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm focus:border-forest focus:outline-none"
-          />
-          <input
-            name="phone"
-            placeholder="Phone (optional)"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm focus:border-forest focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full rounded-lg bg-forest px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest-dark disabled:opacity-60"
-          >
-            {submitting ? "Submitting…" : "Confirm request"}
-          </button>
-        </form>
       ) : (
         <button
           type="button"
-          disabled={!quote?.available}
-          onClick={() => setShowReserveForm(true)}
+          disabled={!quote?.available || submitting}
+          onClick={handleReserve}
           className="mt-6 w-full rounded-lg bg-forest px-5 py-3 text-sm font-medium text-cream transition-colors hover:bg-forest-dark disabled:cursor-not-allowed disabled:opacity-40"
         >
-          Reserve
+          {submitting ? "Preparing…" : "Reserve"}
         </button>
       )}
 

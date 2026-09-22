@@ -3,9 +3,9 @@ import { pms } from "@/lib/pms";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { propertyId, checkIn, checkOut, guests, guestName, guestEmail, guestPhone } = body;
+  const { propertyId, checkIn, checkOut, guests } = body;
 
-  if (!propertyId || !checkIn || !checkOut || !guestName || !guestEmail) {
+  if (!propertyId || !checkIn || !checkOut) {
     return Response.json({ error: "Missing required booking fields." }, { status: 400 });
   }
 
@@ -15,9 +15,6 @@ export async function POST(request: NextRequest) {
       checkIn,
       checkOut,
       guests: Number(guests ?? 2),
-      guestName,
-      guestEmail,
-      guestPhone: guestPhone ?? "",
     });
     return Response.json(confirmation);
   } catch (err) {
