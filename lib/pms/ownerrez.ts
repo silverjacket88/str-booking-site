@@ -231,39 +231,59 @@ export const ownerRezPmsAdapter: PmsAdapter = {
   },
 
   async createBooking(request: BookingRequest): Promise<BookingConfirmation> {
-    // Hand off to each cabin's own existing, already-live OwnerRez-powered
-    // direct-booking site for payment, rather than collecting card data on
-    // this site or guessing at a generic checkout URL. (OwnerRez's own
-    // "Creating Quotes and Bookings" doc describes a guest+quote API flow
-    // that returns a "PaymentForm" URL, but the live v2 Quotes response we
-    // tested does not actually include that field — confirmed by creating
-    // a real guest + quote against this account. Rather than guess at
-    // undocumented behavior for a payment redirect, we use the real,
-    // already-working per-cabin sites below instead. Worth following up
-    // with OwnerRez support directly if a fully API-driven checkout is
-    // wanted later.)
-    const directBookingSites: Record<string, string> = {
-      "411998": "https://www.takemetotheriver.us/book",
-      "480455": "https://www.chasingsunsetcabin.com/book",
-      "361555": "https://www.thewthcabin.com/book",
+    // Embed OwnerRez's own Inquiry/Booking widget directly (via iframe) on
+    // this site's confirmation step, instead of redirecting guests to each
+    // cabin's separate marketing domain. Same underlying OwnerRez checkout
+    // (still PCI-safe — payment happens inside OwnerRez's own iframe, never
+    // touching this app), but the guest never appears to leave this site.
+    //
+    // widgetId/propertyKey below were read directly out of each cabin's own
+    // existing site's embedded widget (view-source on their /book page) —
+    // confirmed the widget's host, app.ownerrez.com, sends no
+    // X-Frame-Options/frame-ancestors restriction, so embedding it
+    // cross-domain here is not blocked.
+    //
+    // or_arrival/or_departure/or_adults all confirmed prefilling correctly
+    // when embedded this way (tested live). They did NOT prefill when
+    // testing via each cabin's own existing WordPress site — that's the
+    // "double iframe" issue OwnerRez's docs warn about (WordPress wraps
+    // their embed snippet in an extra iframe layer, which blocks the
+    // widget from reading its own URL params). Embedding a single clean
+    // iframe directly, as done here, avoids that problem entirely.
+    const widgets: Record<string, { widgetId: string; propertyKey: string }> = {
+      "411998": {
+        widgetId: "8803317455f741e89a289c1c38a7049a",
+        propertyKey: "2e573ca29680483b956f01634ee15081",
+      },
+      "480455": {
+        widgetId: "acc8b0a60b9d4aa38e5174a013f798ee",
+        propertyKey: "6e8229a102f94317a7eb02acceb90675",
+      },
+      "361555": {
+        widgetId: "bbc7ea996a994981bfe1f786bdbc0411",
+        propertyKey: "4a53f63795f04414b14eb3d6bb6b5b0c",
+      },
     };
 
-    const base = directBookingSites[request.propertyId];
-    if (!base) {
+    const widget = widgets[request.propertyId];
+    if (!widget) {
       throw new Error(
-        `No direct-booking site configured for OwnerRez property ${request.propertyId}. Add it to directBookingSites in lib/pms/ownerrez.ts.`
+        `No OwnerRez widget configured for property ${request.propertyId}. Add it to the widgets map in lib/pms/ownerrez.ts.`
       );
     }
 
-    const bookUrl = new URL(base);
-    bookUrl.searchParams.set("arrival", request.checkIn);
-    bookUrl.searchParams.set("departure", request.checkOut);
-    bookUrl.searchParams.set("adults", String(request.guests));
+    const widgetUrl = new URL(
+      `https://app.ownerrez.com/widgets/${widget.widgetId}`
+    );
+    widgetUrl.searchParams.set("propertyKey", widget.propertyKey);
+    widgetUrl.searchParams.set("or_arrival", request.checkIn);
+    widgetUrl.searchParams.set("or_departure", request.checkOut);
+    widgetUrl.searchParams.set("or_adults", String(request.guests));
 
     return {
-      bookingId: bookUrl.toString(),
+      bookingId: widgetUrl.toString(),
       status: "pending_payment",
-      confirmationCode: "REDIRECT",
+      confirmationCode: "EMBED",
     };
   },
 };

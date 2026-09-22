@@ -129,21 +129,17 @@ export default function BookingPanel({ property }: { property: Property }) {
         ) : null}
       </div>
 
-      {confirmation && confirmation.confirmationCode === "REDIRECT" ? (
-        <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
-          <p className="font-medium">Almost there.</p>
-          <p className="mt-1">
-            One last step: confirm your dates and pay securely on our booking partner&apos;s
-            checkout page.
+      {confirmation && confirmation.confirmationCode === "EMBED" ? (
+        <div className="mt-6">
+          <p className="mb-3 text-sm text-ink-soft">
+            Almost there — confirm your dates below and pay securely to complete your
+            reservation.
           </p>
-          <a
-            href={confirmation.bookingId}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
-          >
-            Continue to secure checkout →
-          </a>
+          <iframe
+            src={confirmation.bookingId}
+            title="Complete your booking"
+            className="h-[720px] w-full rounded-lg border border-line"
+          />
         </div>
       ) : confirmation ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
