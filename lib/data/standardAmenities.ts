@@ -1,0 +1,17 @@
+export const standardAmenities: string[] = [
+  "High-speed WiFi",
+  "Fully equipped kitchen",
+  "In-unit washer & dryer",
+  "Free driveway parking",
+  "Smoke & CO alarms",
+  "First aid kit",
+  "Fire extinguisher",
+  "Iron & board",
+  "Hair dryer",
+  "Smart TV with streaming",
+  "Central heating & A/C",
+  "Coffee maker",
+  "Dishwasher",
+  "Pack-n-play available on request",
+  "Self check-in with smart lock",
+];
