@@ -127,6 +127,14 @@ export default function BookingPanel({ property }: { property: Property }) {
           <iframe
             src={confirmation.bookingId}
             title="Complete your booking"
+            // OwnerRez's widget script relies on the `unload` event to
+            // complete its internal navigation to the payment step, which
+            // browsers block by default inside iframes unless explicitly
+            // allowed here. Confirmed via a real console error
+            // ("Permissions policy violation: unload is not allowed in
+            // this document") that this was the actual cause of the
+            // widget hanging on "Redirecting to checkout..." forever.
+            allow="unload; payment"
             className="h-[720px] w-full rounded-lg border border-line"
           />
         </div>
