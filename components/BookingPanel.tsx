@@ -135,7 +135,7 @@ export default function BookingPanel({ property }: { property: Property }) {
             // this document") that this was the actual cause of the
             // widget hanging on "Redirecting to checkout..." forever.
             allow="unload; payment"
-            className="h-[720px] w-full rounded-lg border border-line"
+            className="h-[950px] w-full rounded-lg border border-line"
           />
         </div>
       ) : confirmation ? (
