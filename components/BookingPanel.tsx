@@ -134,10 +134,16 @@ export default function BookingPanel({ property }: { property: Property }) {
               // cross-origin iframe navigation restrictions that broke the
               // embedded version apply here. The guest's Alderford Homes
               // tab stays open in the background the whole time.
+              //
+              // Deliberately NOT passing "noopener" here: that flag makes
+              // window.open() always return null (even on success, by
+              // design — there's no window reference to give back), which
+              // broke the popup-blocked fallback below and caused the main
+              // tab to redirect every time in addition to the popup.
               const popup = window.open(
                 confirmation.bookingId,
                 "checkout",
-                "width=520,height=800,noopener"
+                "width=520,height=800"
               );
               // Popup blockers can still intervene in rare cases (e.g. the
               // click wasn't treated as a direct user gesture) — fall back
