@@ -120,40 +120,16 @@ export default function BookingPanel({ property }: { property: Property }) {
 
       {confirmation && confirmation.confirmationCode === "REDIRECT" ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
-          <p className="font-medium">Almost there.</p>
-          <p className="mt-1">
-            One last step: confirm your dates and pay securely on our booking partner&apos;s
-            checkout page, opening in a new window. Your guest count carries over
-            automatically — you&apos;ll just need to re-enter your dates once there.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              // A real popup, not an iframe — this is a plain new browser
-              // window navigating itself normally, so none of the
-              // cross-origin iframe navigation restrictions that broke the
-              // embedded version apply here. The guest's Alderford Homes
-              // tab stays open in the background the whole time.
-              //
-              // Deliberately NOT passing "noopener" here: that flag makes
-              // window.open() always return null (even on success, by
-              // design — there's no window reference to give back), which
-              // broke the popup-blocked fallback below and caused the main
-              // tab to redirect every time in addition to the popup.
-              const popup = window.open(
-                confirmation.bookingId,
-                "checkout",
-                "width=520,height=800"
-              );
-              // Popup blockers can still intervene in rare cases (e.g. the
-              // click wasn't treated as a direct user gesture) — fall back
-              // to a same-tab redirect rather than leaving the guest stuck.
-              if (!popup) window.location.href = confirmation.bookingId;
-            }}
-            className="mt-3 w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
+          {/* Same-tab navigation, not a popup or iframe — a plain
+              top-level page navigating itself normally, so none of the
+              cross-origin iframe navigation restrictions that broke the
+              embedded version apply here. */}
+          <a
+            href={confirmation.bookingId}
+            className="mt-3 inline-block w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
           >
             Continue to secure checkout →
-          </button>
+          </a>
         </div>
       ) : confirmation ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
