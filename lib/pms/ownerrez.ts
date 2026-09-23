@@ -244,33 +244,28 @@ export const ownerRezPmsAdapter: PmsAdapter = {
     // clicking through the form successfully creates the booking and
     // advances past "Booking prepared!" — unlike the earlier iframe-embed
     // attempt, which never got that far due to a browser restriction on
-    // iframes navigating themselves. widgetId/propertyKey were read
-    // directly out of each cabin's own site (view-source on their /book
-    // page's embedded widget).
-    const widgets: Record<string, { widgetId: string; propertyKey: string }> = {
-      "411998": {
-        widgetId: "8803317455f741e89a289c1c38a7049a",
-        propertyKey: "2e573ca29680483b956f01634ee15081",
-      },
-      "480455": {
-        widgetId: "acc8b0a60b9d4aa38e5174a013f798ee",
-        propertyKey: "6e8229a102f94317a7eb02acceb90675",
-      },
-      "361555": {
-        widgetId: "bbc7ea996a994981bfe1f786bdbc0411",
-        propertyKey: "4a53f63795f04414b14eb3d6bb6b5b0c",
-      },
+    // iframes navigating themselves.
+    //
+    // All 3 cabins share ONE widget definition in OwnerRez (Settings ->
+    // Widgets -> "Booking/Inquiry", which is where the custom CSS/logo is
+    // configured) — only the propertyKey differs per cabin, read from
+    // OwnerRez's own "Generate Code" tool for each property.
+    const WIDGET_ID = "27897ef225cd464eb791fbeda7b32845";
+    const propertyKeys: Record<string, string> = {
+      "411998": "2e573ca29680483b956f01634ee15081",
+      "480455": "6e8229a102f94317a7eb02acceb90675",
+      "361555": "4a53f63795f04414b14eb3d6bb6b5b0c",
     };
 
-    const widget = widgets[request.propertyId];
-    if (!widget) {
+    const propertyKey = propertyKeys[request.propertyId];
+    if (!propertyKey) {
       throw new Error(
-        `No OwnerRez widget configured for property ${request.propertyId}. Add it to the widgets map in lib/pms/ownerrez.ts.`
+        `No OwnerRez propertyKey configured for property ${request.propertyId}. Add it to propertyKeys in lib/pms/ownerrez.ts.`
       );
     }
 
-    const widgetUrl = new URL(`https://app.ownerrez.com/widgets/${widget.widgetId}`);
-    widgetUrl.searchParams.set("propertyKey", widget.propertyKey);
+    const widgetUrl = new URL(`https://app.ownerrez.com/widgets/${WIDGET_ID}`);
+    widgetUrl.searchParams.set("propertyKey", propertyKey);
     widgetUrl.searchParams.set("or_arrival", request.checkIn);
     widgetUrl.searchParams.set("or_departure", request.checkOut);
     widgetUrl.searchParams.set("or_adults", String(request.guests));
