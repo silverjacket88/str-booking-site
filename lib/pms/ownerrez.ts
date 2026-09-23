@@ -145,6 +145,19 @@ interface QuoteViewModel {
   charges: QuoteChargeModel[];
 }
 
+// All 3 cabins share ONE widget definition in OwnerRez (Settings -> Widgets
+// -> "Booking/Inquiry", which is where the custom CSS/logo is configured) —
+// only the propertyKey differs per cabin, read from OwnerRez's own "Generate
+// Code" tool for each property. Exported so the /book embed page (see
+// app/book/[propertyId]/page.tsx) can render OwnerRez's official widget.js
+// embed with the same ids.
+export const OWNERREZ_WIDGET_ID = "27897ef225cd464eb791fbeda7b32845";
+export const OWNERREZ_PROPERTY_KEYS: Record<string, string> = {
+  "411998": "2e573ca29680483b956f01634ee15081",
+  "480455": "6e8229a102f94317a7eb02acceb90675",
+  "361555": "4a53f63795f04414b14eb3d6bb6b5b0c",
+};
+
 export const ownerRezPmsAdapter: PmsAdapter = {
   async listPropertyIds() {
     const data = await ownerRezFetch<PageableListOfPropertyViewModel>(
@@ -231,40 +244,25 @@ export const ownerRezPmsAdapter: PmsAdapter = {
   },
 
   async createBooking(request: BookingRequest): Promise<BookingConfirmation> {
-    // Popup opens OwnerRez's bare booking FORM directly (app.ownerrez.com/
-    // widgets/...) rather than the cabin's full marketing website. The
-    // marketing sites (thewthcabin.com etc.) work, but show their own
-    // complete site chrome — logo, nav, hero image — which reads as "a
-    // totally different company's website," not a checkout step. The raw
-    // widget is just the form, no site branding, which feels much closer
-    // to "one step in this booking flow" when it pops up.
-    //
-    // Confirmed working as a real popup/top-level page (not an iframe):
-    // dates/adults prefill via or_arrival/or_departure/or_adults, and
-    // clicking through the form successfully creates the booking and
-    // advances past "Booking prepared!" — unlike the earlier iframe-embed
-    // attempt, which never got that far due to a browser restriction on
-    // iframes navigating themselves.
-    //
-    // All 3 cabins share ONE widget definition in OwnerRez (Settings ->
-    // Widgets -> "Booking/Inquiry", which is where the custom CSS/logo is
-    // configured) — only the propertyKey differs per cabin, read from
-    // OwnerRez's own "Generate Code" tool for each property.
-    const WIDGET_ID = "27897ef225cd464eb791fbeda7b32845";
-    const propertyKeys: Record<string, string> = {
-      "411998": "2e573ca29680483b956f01634ee15081",
-      "480455": "6e8229a102f94317a7eb02acceb90675",
-      "361555": "4a53f63795f04414b14eb3d6bb6b5b0c",
-    };
-
-    const propertyKey = propertyKeys[request.propertyId];
+    // Same-tab redirect to OwnerRez's own hosted widget PAGE (`view=form`),
+    // not the bare widget URL. That `view=form` wrapper page loads its own
+    // copy of widget.js around the actual form (which lives in a nested
+    // iframe), and widget.js is what catches the form's "checkout ready"
+    // postMessage and completes `window.top.location = url`. The bare URL
+    // (what this used to point to) has nothing to catch that message, so
+    // checkout hangs forever on "Booking prepared!" — confirmed by testing
+    // both this exact URL shape AND OwnerRez's own reference customer site
+    // (getawayandstay.com, which uses this identical `view=form` pattern)
+    // side by side against the bare URL.
+    const propertyKey = OWNERREZ_PROPERTY_KEYS[request.propertyId];
     if (!propertyKey) {
       throw new Error(
-        `No OwnerRez propertyKey configured for property ${request.propertyId}. Add it to propertyKeys in lib/pms/ownerrez.ts.`
+        `No OwnerRez propertyKey configured for property ${request.propertyId}. Add it to OWNERREZ_PROPERTY_KEYS in lib/pms/ownerrez.ts.`
       );
     }
 
-    const widgetUrl = new URL(`https://app.ownerrez.com/widgets/${WIDGET_ID}`);
+    const widgetUrl = new URL(`https://app.ownerrez.com/widgets/${OWNERREZ_WIDGET_ID}`);
+    widgetUrl.searchParams.set("view", "form");
     widgetUrl.searchParams.set("propertyKey", propertyKey);
     widgetUrl.searchParams.set("or_arrival", request.checkIn);
     widgetUrl.searchParams.set("or_departure", request.checkOut);
