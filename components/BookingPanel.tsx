@@ -123,15 +123,31 @@ export default function BookingPanel({ property }: { property: Property }) {
           <p className="font-medium">Almost there.</p>
           <p className="mt-1">
             One last step: confirm your dates and pay securely on our booking partner&apos;s
-            checkout page. Your guest count carries over automatically — you&apos;ll just
-            need to re-enter your dates once there.
+            checkout page, opening in a new window. Your guest count carries over
+            automatically — you&apos;ll just need to re-enter your dates once there.
           </p>
-          <a
-            href={confirmation.bookingId}
-            className="mt-3 inline-block w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
+          <button
+            type="button"
+            onClick={() => {
+              // A real popup, not an iframe — this is a plain new browser
+              // window navigating itself normally, so none of the
+              // cross-origin iframe navigation restrictions that broke the
+              // embedded version apply here. The guest's Alderford Homes
+              // tab stays open in the background the whole time.
+              const popup = window.open(
+                confirmation.bookingId,
+                "checkout",
+                "width=520,height=800,noopener"
+              );
+              // Popup blockers can still intervene in rare cases (e.g. the
+              // click wasn't treated as a direct user gesture) — fall back
+              // to a same-tab redirect rather than leaving the guest stuck.
+              if (!popup) window.location.href = confirmation.bookingId;
+            }}
+            className="mt-3 w-full rounded-lg bg-forest px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-forest-dark"
           >
             Continue to secure checkout →
-          </a>
+          </button>
         </div>
       ) : confirmation ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
