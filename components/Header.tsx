@@ -43,7 +43,7 @@ export default function Header() {
             href="/cabins"
             className="rounded-full bg-forest px-5 py-2.5 font-brand text-xs font-bold uppercase tracking-[0.1em] text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] transition-colors hover:bg-forest-dark"
           >
-            Begin Your Escape
+            Book Your Escape
           </Link>
         </div>
 
@@ -84,7 +84,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-forest px-5 py-3 text-center font-brand text-xs font-bold uppercase tracking-[0.1em] text-cream"
             >
-              Begin Your Escape →
+              Book Your Escape →
             </Link>
           </nav>
         </div>

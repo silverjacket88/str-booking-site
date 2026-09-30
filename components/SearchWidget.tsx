@@ -69,7 +69,7 @@ export default function SearchWidget() {
         type="submit"
         className="w-full rounded-full bg-forest px-5 py-2.5 text-sm font-medium text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] transition-colors hover:bg-forest-dark"
       >
-        Find your stay
+        Book Your Escape
       </button>
     </form>
   );
