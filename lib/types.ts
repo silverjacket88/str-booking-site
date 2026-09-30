@@ -8,7 +8,8 @@ export type AmenityTag =
   | "beach-access"
   | "on-the-water"
   | "mountain-views"
-  | "large-groups";
+  | "large-groups"
+  | "fire-pit";
 
 export interface AmenityTagInfo {
   slug: AmenityTag;
