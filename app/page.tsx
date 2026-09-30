@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroVideoBackground from "@/components/HeroVideoBackground";
+import HeroRotatingText from "@/components/HeroRotatingText";
 import SearchWidget from "@/components/SearchWidget";
 import StatsBar from "@/components/StatsBar";
 import AmenityChips from "@/components/AmenityChips";
@@ -33,11 +34,7 @@ export default function HomePage() {
             Mountain views or riverfront — your Smokies escape,{" "}
             <span className="italic">done right</span>.
           </h1>
-          <p className="mt-6 max-w-xl text-base text-cream/90 md:text-lg">
-            {siteConfig.description}{" "}
-            No portfolio of a hundred houses — just three, in Sevierville, kept the way
-            we&apos;d want them kept for our own family.
-          </p>
+          <HeroRotatingText />
         </div>
 
         <div className="mx-auto max-w-7xl px-6">
@@ -50,12 +47,12 @@ export default function HomePage() {
           <StatsBar
             stats={[
               { value: properties.length, label: "Handpicked Stays" },
-              { value: `${market.name}, ${market.state}`, label: "Smoky Mountains, TN" },
-              { value: avgRating, decimals: 2, label: "Guest Rating" },
+              { value: `${market.name}, ${market.state}`, label: "Prime Smoky Location" },
+              { value: avgRating, decimals: 2, label: "Guest Approved" },
               {
                 value: siteConfig.stats.avgResponseMinutes,
                 suffix: "min",
-                label: "We Answer Fast",
+                label: "Here When You Need Us",
               },
             ]}
           />
@@ -65,10 +62,10 @@ export default function HomePage() {
       {/* Amenity chips */}
       <section className="mx-auto max-w-7xl px-6 py-16">
         <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-          Find your perfect stay
+          Your escape, your way
         </p>
         <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
-          Browse by what matters most to you.
+          Search by the things you can&apos;t vacation without.
         </h2>
         <div className="mt-8">
           <AmenityChips />

@@ -12,7 +12,7 @@ export const properties: Property[] = [
     favoriteLabel: "Sevierville favorite",
     tagline: "Private hot tub, direct river access, and a game room — steps from the Little Pigeon River.",
     description: [
-      "Escape to Take Me to The River cabin — a private riverfront oasis on the Little Pigeon River in the Smoky Mountains. Wake up to water views, step just seconds to the river, relax in the hot tub, or enjoy arcade games with family and friends.",
+      "Escape to Take Me to The River cabin — a private riverfront oasis on the Little Pigeon River in the Smoky Mountains. Wake up to water views, step just seconds to the river, relax in the hot tub, gather around the fire pit, or enjoy arcade games with family and friends.",
       "Three bedrooms across the main and upper levels — two with king beds, one with a queen bunk — make this an easy fit for couples, families, or small groups. Surrounded by nature yet minutes from the Greenbrier entrance to Great Smoky Mountains National Park.",
     ],
     maxGuests: 8,
@@ -20,10 +20,11 @@ export const properties: Property[] = [
     baths: 2.5,
     rating: 5,
     reviewCount: 103,
-    tags: ["hot-tub", "on-the-water", "game-room", "family"],
+    tags: ["hot-tub", "on-the-water", "game-room", "family", "fire-pit"],
     amenities: [
       "Private hot tub",
       "Direct private river access (Little Pigeon River)",
+      "Fire pit",
       "Electric fireplace",
       "Game room with arcade machine",
       "Two-level riverfront deck",
