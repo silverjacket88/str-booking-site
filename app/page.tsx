@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroVideoBackground from "@/components/HeroVideoBackground";
+import HeroRotatingHeadline from "@/components/HeroRotatingHeadline";
 import HeroRotatingText from "@/components/HeroRotatingText";
 import SearchWidget from "@/components/SearchWidget";
 import StatsBar from "@/components/StatsBar";
@@ -30,10 +31,7 @@ export default function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream">
             {market.name}, {market.state}
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl leading-[1.1] tracking-tight text-cream sm:text-5xl md:text-6xl">
-            Mountain views or riverfront — your Smokies escape,{" "}
-            <span className="italic">done right</span>.
-          </h1>
+          <HeroRotatingHeadline />
           <HeroRotatingText />
         </div>
 

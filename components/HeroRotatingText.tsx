@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Slide =
   | { kind: "copy"; text: string }
@@ -45,65 +45,34 @@ const SLIDES: Slide[] = [
 ];
 
 export default function HeroRotatingText() {
-  const [typed, setTyped] = useState("");
-  const [author, setAuthor] = useState<string | null>(null);
-  const [fading, setFading] = useState(false);
-  const runningRef = useRef(true);
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    runningRef.current = true;
-    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-    async function loop() {
-      let i = 0;
-      while (runningRef.current) {
-        const slide = SLIDES[i % SLIDES.length];
-        setAuthor(slide.kind === "review" ? slide.author : null);
-        setFading(false);
-
-        for (let c = 1; c <= slide.text.length && runningRef.current; c++) {
-          setTyped(slide.text.slice(0, c));
-          await sleep(28);
-        }
-
-        if (slide.kind === "review") {
-          await sleep(3200);
-          setFading(true);
-          await sleep(600);
-          setTyped("");
-          setAuthor(null);
-          await sleep(300);
-        } else {
-          await sleep(2200);
-          for (let c = slide.text.length; c >= 0 && runningRef.current; c--) {
-            setTyped(slide.text.slice(0, c));
-            await sleep(14);
-          }
-          await sleep(300);
-        }
-        i++;
-      }
-    }
-
-    loop();
-    return () => {
-      runningRef.current = false;
-    };
+    const rotate = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % SLIDES.length);
+        setVisible(true);
+      }, 600);
+    }, 6500);
+    return () => clearInterval(rotate);
   }, []);
+
+  const slide = SLIDES[index];
 
   return (
     <div className="mt-6 max-w-xl min-h-[6.5rem] md:min-h-[5.5rem]">
       <p
         className={`text-base text-cream/90 transition-opacity duration-600 ease-in-out md:text-lg ${
-          fading ? "opacity-0" : "opacity-100"
+          visible ? "opacity-100" : "opacity-0"
         }`}
       >
-        {typed}
-        {!(fading && author) && (
-          <span className="ml-0.5 inline-block h-[1em] w-[2px] animate-pulse bg-cream align-middle" />
-        )}
-        {author && (
-          <span className="mt-2 block text-sm not-italic text-cream/70">— {author}</span>
+        {slide.text}
+        {slide.kind === "review" && (
+          <span className="mt-2 block text-sm not-italic text-cream/70">
+            — {slide.author}
+          </span>
         )}
       </p>
     </div>
