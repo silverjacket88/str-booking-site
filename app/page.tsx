@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroVideoBackground from "@/components/HeroVideoBackground";
 import SearchWidget from "@/components/SearchWidget";
 import StatsBar from "@/components/StatsBar";
 import AmenityChips from "@/components/AmenityChips";
@@ -22,23 +23,15 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="https://picsum.photos/seed/alderford-hero/1920/1200"
-            alt=""
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/20 to-cream" />
-        </div>
+        <HeroVideoBackground />
 
         <div className="mx-auto max-w-7xl px-6 pb-40 pt-28 md:pt-36">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream">
             {market.name}, {market.state}
           </p>
           <h1 className="mt-4 max-w-2xl font-display text-4xl leading-[1.1] tracking-tight text-cream sm:text-5xl md:text-6xl">
-            Three cabins, <span className="italic">one</span> family running them.
+            Mountain views or riverfront — your Smokies escape,{" "}
+            <span className="italic">done right</span>.
           </h1>
           <p className="mt-6 max-w-xl text-base text-cream/90 md:text-lg">
             {siteConfig.description}{" "}
@@ -56,13 +49,13 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 pb-16 pt-10">
           <StatsBar
             stats={[
-              { value: properties.length, label: "Cabins" },
-              { value: `${market.name}, ${market.state}`, label: "Where we operate" },
-              { value: avgRating, decimals: 2, label: "Avg. guest rating" },
+              { value: properties.length, label: "Handpicked Stays" },
+              { value: `${market.name}, ${market.state}`, label: "Smoky Mountains, TN" },
+              { value: avgRating, decimals: 2, label: "Guest Rating" },
               {
                 value: siteConfig.stats.avgResponseMinutes,
                 suffix: "min",
-                label: "Avg. response",
+                label: "We Answer Fast",
               },
             ]}
           />
