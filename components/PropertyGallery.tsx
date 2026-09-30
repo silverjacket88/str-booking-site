@@ -14,7 +14,7 @@ export default function PropertyGallery({
 
   return (
     <div>
-      <div className="grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg">
+      <div className="grid grid-cols-4 grid-rows-1 gap-2 overflow-hidden rounded-lg sm:grid-rows-2">
         <div className="relative col-span-4 row-span-1 aspect-[16/9] sm:col-span-2 sm:row-span-2 sm:aspect-auto">
           <Image
             src={images[0]}
