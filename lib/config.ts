@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: "Alderford Homes",
   shortName: "Alderford",
+  brandTagline: "Hospitality",
   tagline: "Three cabins in Sevierville, run like they're our own.",
   description:
     "A small collection of cabins in Sevierville, TN — locally cleaned, locally supported, booked direct.",
@@ -25,8 +26,8 @@ export const siteConfig = {
   },
   nav: [
     { label: "Our Cabins", href: "/cabins" },
-    { label: "For Owners", href: "/for-owners" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Fun Facts", href: "/#fun-facts" },
+    { label: "Our Story", href: "/about" },
+    { label: "Get in Touch", href: "/contact" },
   ],
 } as const;

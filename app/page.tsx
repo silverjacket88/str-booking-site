@@ -176,7 +176,7 @@ export default function HomePage() {
       </section>
 
       {/* Fun facts about the area */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
+      <section id="fun-facts" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16">
         <p className="text-xs font-semibold uppercase tracking-wider text-forest">
           While you&apos;re here
         </p>

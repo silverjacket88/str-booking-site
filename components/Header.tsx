@@ -12,19 +12,24 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line/70 bg-cream/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-xl tracking-tight text-ink">
-          {siteConfig.name}
+        <Link href="/" className="flex flex-col items-center font-brand text-ink">
+          <span className="text-lg font-bold uppercase tracking-[0.14em]">
+            {siteConfig.name}
+          </span>
+          <span className="text-[10px] font-light uppercase tracking-[0.48em] text-forest-dark">
+            — {siteConfig.brandTagline} —
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {siteConfig.nav.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-forest ${
-                  active ? "text-forest" : "text-ink-soft"
+                className={`font-brand text-xs font-normal uppercase tracking-[0.14em] transition-colors hover:text-forest ${
+                  active ? "text-forest" : "text-forest-dark"
                 }`}
               >
                 {item.label}
@@ -36,9 +41,9 @@ export default function Header() {
         <div className="hidden md:block">
           <Link
             href="/cabins"
-            className="rounded-full bg-forest px-5 py-2.5 text-sm font-medium text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] transition-colors hover:bg-forest-dark"
+            className="rounded-full bg-forest px-5 py-2.5 font-brand text-xs font-bold uppercase tracking-[0.1em] text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] transition-colors hover:bg-forest-dark"
           >
-            Find your stay
+            Begin Your Escape
           </Link>
         </div>
 
@@ -77,9 +82,9 @@ export default function Header() {
             <Link
               href="/cabins"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-forest px-5 py-3 text-center text-sm font-medium text-cream"
+              className="mt-2 rounded-full bg-forest px-5 py-3 text-center font-brand text-xs font-bold uppercase tracking-[0.1em] text-cream"
             >
-              Find your stay →
+              Begin Your Escape →
             </Link>
           </nav>
         </div>
