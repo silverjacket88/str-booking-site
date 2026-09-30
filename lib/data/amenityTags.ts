@@ -38,6 +38,12 @@ export const amenityTags: AmenityTagInfo[] = [
     emoji: "🎱",
   },
   {
+    slug: "fire-pit",
+    label: "Fire Pit",
+    blurb: "S'mores under the stars",
+    emoji: "🔥",
+  },
+  {
     slug: "beach-access",
     label: "Beach Access",
     blurb: "Sand between your toes",

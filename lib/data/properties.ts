@@ -67,7 +67,7 @@ export const properties: Property[] = [
     baths: 2.5,
     rating: 5,
     reviewCount: 24,
-    tags: ["hot-tub", "mountain-views", "couples", "family"],
+    tags: ["hot-tub", "mountain-views", "couples", "family", "fire-pit"],
     amenities: [
       "Private hot tub with mountain views",
       "Fire pit with seating",
@@ -114,7 +114,7 @@ export const properties: Property[] = [
     baths: 3.5,
     rating: 4.99,
     reviewCount: 151,
-    tags: ["hot-tub", "mountain-views", "game-room", "large-groups"],
+    tags: ["hot-tub", "mountain-views", "game-room", "large-groups", "fire-pit"],
     amenities: [
       "Private hot tub & jacuzzi",
       "Two master suites with spa-style bathrooms",
