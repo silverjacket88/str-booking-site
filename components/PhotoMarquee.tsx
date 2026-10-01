@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-const SPEED_PX_PER_SEC = 45;
+const SPEED_PX_PER_SEC = 68;
 const FOCUS_RADIUS_PX = 260;
 const MIN_SCALE = 0.62;
-const MAX_SCALE = 1.4;
+const MAX_SCALE = 1.85;
 
 export default function PhotoMarquee({ images }: { images: string[] }) {
   // Render the strip twice back-to-back so the loop can wrap seamlessly.
