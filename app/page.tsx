@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroVideoBackground from "@/components/HeroVideoBackground";
-import HeroRotatingHeadline from "@/components/HeroRotatingHeadline";
-import HeroRotatingText from "@/components/HeroRotatingText";
+import HeroQA from "@/components/HeroQA";
 import SearchWidget from "@/components/SearchWidget";
 import StatsBar from "@/components/StatsBar";
 import AmenityChips from "@/components/AmenityChips";
@@ -31,8 +30,7 @@ export default function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream">
             {market.name}, {market.state}
           </p>
-          <HeroRotatingHeadline />
-          <HeroRotatingText />
+          <HeroQA />
         </div>
 
         <div className="mx-auto max-w-7xl px-6">
