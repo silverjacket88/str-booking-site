@@ -5,6 +5,11 @@ import { Part, QAPair, holidayConversations, weekdayConversations } from "@/lib/
 import { getActiveHoliday } from "@/lib/utils/holidays";
 import { getEasternDateOnly, getEasternWeekday } from "@/lib/utils/weeklyRotation";
 
+// Temporarily off while the base 70 lines are still being reviewed — flip
+// back to true once that's settled. Leaving the rest of the holiday logic
+// in place so re-enabling is a one-line change.
+const HOLIDAY_SUBSTITUTION_ENABLED = false;
+
 // Holiday pairs are only inserted on these weekdays (0=Sun..6=Sat).
 const HOLIDAY_DAYS = [2, 4]; // Tuesday, Thursday
 const HOLIDAY_SLOTS = 2;
@@ -31,7 +36,7 @@ function buildTodaysPairs(): QAPair[] {
   const weekday = getEasternWeekday();
   const base = [...(weekdayConversations[weekday] ?? weekdayConversations[1])];
 
-  if (HOLIDAY_DAYS.includes(weekday)) {
+  if (HOLIDAY_SUBSTITUTION_ENABLED && HOLIDAY_DAYS.includes(weekday)) {
     const holiday = getActiveHoliday(getEasternDateOnly());
     if (holiday) {
       const pool = holidayConversations[holiday] ?? [];
@@ -47,15 +52,14 @@ function buildTodaysPairs(): QAPair[] {
   return base;
 }
 
-// Static, deterministic default used for server rendering and the very
-// first client paint, so hydration always matches. The real day/holiday
-// aware set is computed client-side after mount (buildTodaysPairs uses
-// Math.random and the visitor's clock, both of which can legitimately
-// differ from the server and would otherwise cause a hydration mismatch).
-const DEFAULT_PAIRS = weekdayConversations[1];
-
+// This page is statically built, so any day-of-week/holiday logic has to
+// run client-side (after mount) to reflect the visitor's actual "today"
+// rather than whatever day the site last happened to be deployed on.
+// Starting from `null` (instead of a hardcoded day's pairs) avoids a
+// visible flash of the wrong day's question before the real one loads —
+// nothing types until the real pairs are known.
 export default function HeroQA() {
-  const [pairs, setPairs] = useState<QAPair[]>(DEFAULT_PAIRS);
+  const [pairs, setPairs] = useState<QAPair[] | null>(null);
   const [pairIndex, setPairIndex] = useState(0);
   const [typedCount, setTypedCount] = useState(0);
   const [answerVisible, setAnswerVisible] = useState(false);
@@ -66,6 +70,8 @@ export default function HeroQA() {
   }, []);
 
   useEffect(() => {
+    if (!pairs) return;
+    const todaysPairs = pairs;
     runningRef.current = true;
     setPairIndex(0);
     setTypedCount(0);
@@ -75,8 +81,8 @@ export default function HeroQA() {
     async function loop() {
       let i = 0;
       while (runningRef.current) {
-        setPairIndex(i % pairs.length);
-        const pair = pairs[i % pairs.length];
+        setPairIndex(i % todaysPairs.length);
+        const pair = todaysPairs[i % todaysPairs.length];
         const len = fullLength(pair.q);
 
         setAnswerVisible(false);
@@ -104,21 +110,21 @@ export default function HeroQA() {
     };
   }, [pairs]);
 
-  const pair = pairs[pairIndex];
+  const pair = pairs ? pairs[pairIndex] : null;
 
   return (
     <>
       <h1 className="mt-4 max-w-2xl min-h-[10rem] font-display text-4xl leading-[1.1] tracking-tight text-cream sm:min-h-[9rem] sm:text-5xl md:min-h-[11rem] md:text-6xl">
-        {renderPartial(pair.q, typedCount)}
+        {pair && renderPartial(pair.q, typedCount)}
         <span className="ml-1 inline-block h-[0.85em] w-[3px] animate-pulse bg-cream align-middle" />
       </h1>
       <div className="mt-6 max-w-xl min-h-[4rem]">
         <p
           className={`text-base text-cream/90 transition-opacity duration-500 ease-in-out md:text-lg ${
-            answerVisible ? "opacity-100" : "opacity-0"
+            answerVisible && pair ? "opacity-100" : "opacity-0"
           }`}
         >
-          {pair.a}
+          {pair?.a}
         </p>
       </div>
     </>

@@ -1,104 +1,93 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { galleryPhotos } from "@/lib/data/galleryPhotos";
+import { getEasternWeekNumber } from "@/lib/utils/weeklyRotation";
+import { pickWeeklyPhotos } from "@/lib/utils/weeklyPhotos";
 
-const SPEED_PX_PER_SEC = 68;
-const FOCUS_RADIUS_PX = 260;
-const MIN_SCALE = 0.62;
-const MAX_SCALE = 1.85;
+// Picking the weekly set client-side (not in the server-rendered page)
+// matters because this homepage is statically built — a server-computed
+// "this week's photos" would freeze to whatever week the site was last
+// deployed in, instead of actually changing week to week.
+const FALLBACK_PHOTOS = [
+  ...galleryPhotos.riverCabin.slice(0, 7),
+  ...galleryPhotos.chasingSunset.slice(0, 7),
+  ...galleryPhotos.wthCabin.slice(0, 6),
+];
 
-export default function PhotoMarquee({ images }: { images: string[] }) {
-  // Render the strip twice back-to-back so the loop can wrap seamlessly.
-  const track = [...images, ...images];
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const offsetRef = useRef(0);
-  const layoutRef = useRef<{ lefts: number[]; widths: number[]; totalWidth: number }>({
-    lefts: [],
-    widths: [],
-    totalWidth: 0,
-  });
+export default function PhotoMarquee() {
+  const [images, setImages] = useState<string[]>(FALLBACK_PHOTOS);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
-    function measure() {
-      const widths = itemRefs.current.slice(0, images.length).map((el) => el?.offsetWidth ?? 0);
-      const gap = 16;
-      const lefts: number[] = [];
-      let cursor = 0;
-      for (const w of widths) {
-        lefts.push(cursor);
-        cursor += w + gap;
-      }
-      layoutRef.current = { lefts, widths, totalWidth: cursor };
+    setImages(pickWeeklyPhotos(getEasternWeekNumber()));
+  }, []);
+
+  useEffect(() => {
+    if (!selected) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setSelected(null);
     }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected]);
 
-    measure();
-    window.addEventListener("resize", measure);
-
-    let raf = 0;
-    let last = performance.now();
-
-    function frame(now: number) {
-      const dt = (now - last) / 1000;
-      last = now;
-      const { lefts, widths, totalWidth } = layoutRef.current;
-
-      if (totalWidth > 0 && trackRef.current && containerRef.current) {
-        offsetRef.current -= SPEED_PX_PER_SEC * dt;
-        if (offsetRef.current <= -totalWidth) offsetRef.current += totalWidth;
-        trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
-
-        const containerWidth = containerRef.current.offsetWidth;
-        const centerX = containerWidth / 2;
-
-        for (let i = 0; i < track.length; i++) {
-          const baseIndex = i % images.length;
-          const loopIndex = Math.floor(i / images.length);
-          const itemLeft = lefts[baseIndex] + loopIndex * totalWidth + offsetRef.current;
-          const itemCenter = itemLeft + widths[baseIndex] / 2;
-          const distance = Math.abs(itemCenter - centerX);
-          const focus = Math.max(0, 1 - distance / FOCUS_RADIUS_PX);
-          const scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * focus;
-          const grayscale = 1 - focus;
-
-          const el = itemRefs.current[i];
-          if (el) {
-            el.style.transform = `scale(${scale})`;
-            el.style.filter = `grayscale(${grayscale})`;
-            el.style.zIndex = String(Math.round(focus * 100));
-          }
-        }
-      }
-
-      raf = requestAnimationFrame(frame);
-    }
-
-    raf = requestAnimationFrame(frame);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", measure);
-    };
-  }, [images.length, track.length]);
+  const track = [...images, ...images];
 
   return (
-    <div ref={containerRef} className="overflow-hidden py-6">
-      <div ref={trackRef} className="flex w-max gap-4 will-change-transform">
-        {track.map((src, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              itemRefs.current[i] = el;
-            }}
-            className="relative h-48 w-72 flex-shrink-0 overflow-hidden rounded-lg transition-[filter] duration-150 ease-out sm:h-56 sm:w-80"
-          >
-            <Image src={src} alt="" fill sizes="320px" className="object-cover" />
-          </div>
-        ))}
+    <div>
+      <p className="mb-3 text-center text-xs font-semibold uppercase tracking-wider text-ink-soft">
+        Tap or click a photo to view
+      </p>
+
+      <div className="overflow-hidden py-2">
+        <div className="marquee-track flex w-max gap-4">
+          {track.map((src, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setSelected(src)}
+              aria-label="View larger photo"
+              className="relative h-48 w-72 flex-shrink-0 cursor-pointer overflow-hidden rounded-lg transition-transform duration-200 hover:scale-[1.03] sm:h-56 sm:w-80"
+            >
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="320px"
+                className="object-cover grayscale"
+              />
+            </button>
+          ))}
+        </div>
       </div>
+
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 p-4 sm:p-8"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelected(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelected(null)}
+            aria-label="Close"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-cream text-ink hover:bg-cream-dark sm:right-6 sm:top-6"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </button>
+          <div
+            className="relative h-full max-h-[85vh] w-full max-w-4xl"
+            onClick={() => setSelected(null)}
+          >
+            <Image src={selected} alt="" fill sizes="90vw" className="object-contain" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

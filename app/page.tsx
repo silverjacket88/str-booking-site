@@ -17,12 +17,9 @@ import { market } from "@/lib/data/market";
 import { properties } from "@/lib/data/properties";
 import { reviews } from "@/lib/data/reviews";
 import { siteConfig } from "@/lib/config";
-import { getEasternWeekNumber } from "@/lib/utils/weeklyRotation";
-import { pickWeeklyPhotos } from "@/lib/utils/weeklyPhotos";
 
 export default function HomePage() {
   const avgRating = properties.reduce((sum, p) => sum + p.rating, 0) / properties.length;
-  const marqueeImages = pickWeeklyPhotos(getEasternWeekNumber());
 
   return (
     <>
@@ -101,7 +98,7 @@ export default function HomePage() {
 
       {/* Photo marquee */}
       <section className="py-12">
-        <PhotoMarquee images={marqueeImages} />
+        <PhotoMarquee />
       </section>
 
       {/* Our cabins */}
