@@ -186,9 +186,11 @@ export default function HomePage() {
             {avgRating.toFixed(2)} out of 5, every time.
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((r) => (
-              <ReviewCard key={r.id} review={r} />
-            ))}
+            {reviews
+              .filter((r) => r.featured)
+              .map((r) => (
+                <ReviewCard key={r.id} review={r} />
+              ))}
           </div>
         </div>
       </section>

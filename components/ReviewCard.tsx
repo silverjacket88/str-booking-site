@@ -15,7 +15,9 @@ export default function ReviewCard({ review }: { review: Review }) {
         </div>
         <div>
           <p className="text-sm font-medium text-ink">{review.author}</p>
-          <p className="text-xs text-ink-soft">{review.propertyName} · Verified guest</p>
+          <p className="text-xs text-ink-soft">
+            {review.propertyName} · {review.monthYear}
+          </p>
         </div>
       </div>
     </div>

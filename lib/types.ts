@@ -66,6 +66,8 @@ export interface Review {
   propertyName: string;
   quote: string;
   rating: number;
+  monthYear: string;
+  featured?: boolean;
 }
 
 export interface SearchFilters {
