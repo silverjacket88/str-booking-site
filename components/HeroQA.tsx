@@ -1,53 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Part, QAPair, holidayConversations, weekdayConversations } from "@/lib/data/heroConversations";
+import { getActiveHoliday } from "@/lib/utils/holidays";
+import { getEasternDateOnly, getEasternWeekday } from "@/lib/utils/weeklyRotation";
 
-type Part = { text: string; italic?: boolean };
-
-type Pair = { q: Part[]; a: string };
-
-const PAIRS: Pair[] = [
-  {
-    q: [{ text: "Hi there — ready for your " }, { text: "next", italic: true }, { text: " getaway?" }],
-    a: "We thought you'd never ask. Mountain views and hot tubs are waiting.",
-  },
-  {
-    q: [{ text: "Stressed out and need a break?" }],
-    a: "That's literally our whole business. Pick a cabin, we'll handle the rest.",
-  },
-  {
-    q: [{ text: "Ever wake up to a view like this?" }],
-    a: "You will here. Coffee tastes better over the Smokies.",
-  },
-  {
-    q: [{ text: "Hot tub under the stars sound good?" }],
-    a: "Every cabin's got one. Bring marshmallows for the fire pit too.",
-  },
-  {
-    q: [{ text: "Do bears get " }, { text: "vacation days", italic: true }, { text: "?" }],
-    a: "Unclear. You definitely do, though.",
-  },
-  {
-    q: [{ text: "Tired of hotel ice machines at 2am?" }],
-    a: "Our cabins skip that. Just mountains, quiet, and you.",
-  },
-  {
-    q: [{ text: "Mountain person or " }, { text: "river", italic: true }, { text: " person?" }],
-    a: "Why pick? We've got both.",
-  },
-  {
-    q: [{ text: "Need a real excuse to disconnect?" }],
-    a: "Spotty cell service in the Smokies says yes.",
-  },
-  {
-    q: [{ text: "Wondering what's for s'mores tonight?" }],
-    a: "Whatever you want. The fire pit's already lit.",
-  },
-  {
-    q: [{ text: "So... when are you booking?" }],
-    a: "Right now works great. We'll leave the porch light on.",
-  },
-];
+// Holiday pairs are only inserted on these weekdays (0=Sun..6=Sat).
+const HOLIDAY_DAYS = [2, 4]; // Tuesday, Thursday
+const HOLIDAY_SLOTS = 2;
 
 function fullLength(parts: Part[]) {
   return parts.reduce((sum, p) => sum + p.text.length, 0);
@@ -67,21 +27,56 @@ function renderPartial(parts: Part[], n: number) {
   return nodes;
 }
 
+function buildTodaysPairs(): QAPair[] {
+  const weekday = getEasternWeekday();
+  const base = [...(weekdayConversations[weekday] ?? weekdayConversations[1])];
+
+  if (HOLIDAY_DAYS.includes(weekday)) {
+    const holiday = getActiveHoliday(getEasternDateOnly());
+    if (holiday) {
+      const pool = holidayConversations[holiday] ?? [];
+      const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+      const slotsToReplace = Math.min(HOLIDAY_SLOTS, shuffledPool.length, base.length);
+      const indices = [...Array(base.length).keys()].sort(() => Math.random() - 0.5).slice(0, slotsToReplace);
+      indices.forEach((slot, i) => {
+        base[slot] = shuffledPool[i];
+      });
+    }
+  }
+
+  return base;
+}
+
+// Static, deterministic default used for server rendering and the very
+// first client paint, so hydration always matches. The real day/holiday
+// aware set is computed client-side after mount (buildTodaysPairs uses
+// Math.random and the visitor's clock, both of which can legitimately
+// differ from the server and would otherwise cause a hydration mismatch).
+const DEFAULT_PAIRS = weekdayConversations[1];
+
 export default function HeroQA() {
+  const [pairs, setPairs] = useState<QAPair[]>(DEFAULT_PAIRS);
   const [pairIndex, setPairIndex] = useState(0);
   const [typedCount, setTypedCount] = useState(0);
   const [answerVisible, setAnswerVisible] = useState(false);
   const runningRef = useRef(true);
 
   useEffect(() => {
+    setPairs(buildTodaysPairs());
+  }, []);
+
+  useEffect(() => {
     runningRef.current = true;
+    setPairIndex(0);
+    setTypedCount(0);
+    setAnswerVisible(false);
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
     async function loop() {
       let i = 0;
       while (runningRef.current) {
-        setPairIndex(i % PAIRS.length);
-        const pair = PAIRS[i % PAIRS.length];
+        setPairIndex(i % pairs.length);
+        const pair = pairs[i % pairs.length];
         const len = fullLength(pair.q);
 
         setAnswerVisible(false);
@@ -107,9 +102,9 @@ export default function HeroQA() {
     return () => {
       runningRef.current = false;
     };
-  }, []);
+  }, [pairs]);
 
-  const pair = PAIRS[pairIndex];
+  const pair = pairs[pairIndex];
 
   return (
     <>

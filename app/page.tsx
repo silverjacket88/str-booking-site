@@ -11,14 +11,18 @@ import StayTimeline from "@/components/StayTimeline";
 import ReviewCard from "@/components/ReviewCard";
 import PhotoMarquee from "@/components/PhotoMarquee";
 import LocalFunFacts from "@/components/LocalFunFacts";
+import WhereWeOperateHeading from "@/components/WhereWeOperateHeading";
+import OurCabinsHeading from "@/components/OurCabinsHeading";
 import { market } from "@/lib/data/market";
 import { properties } from "@/lib/data/properties";
 import { reviews } from "@/lib/data/reviews";
 import { siteConfig } from "@/lib/config";
+import { getEasternWeekNumber } from "@/lib/utils/weeklyRotation";
+import { pickWeeklyPhotos } from "@/lib/utils/weeklyPhotos";
 
 export default function HomePage() {
   const avgRating = properties.reduce((sum, p) => sum + p.rating, 0) / properties.length;
-  const marqueeImages = properties.flatMap((p) => p.images.slice(0, 2));
+  const marqueeImages = pickWeeklyPhotos(getEasternWeekNumber());
 
   return (
     <>
@@ -72,14 +76,7 @@ export default function HomePage() {
       <section className="border-y border-line/60 bg-cream-dark/50 py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-              Where we operate
-            </p>
-            <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
-              All three cabins, one town: {market.name}, {market.state}.
-            </h2>
-            <span className="mt-3 block h-[3px] w-12 bg-forest" aria-hidden />
-            <p className="mt-4 max-w-md text-ink-soft">{market.blurb}</p>
+            <WhereWeOperateHeading />
             <p className="mt-2 max-w-md text-sm text-ink-soft">
               Covers {market.towns.join(", ")}.
             </p>
@@ -114,9 +111,7 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-wider text-forest">
               Our cabins
             </p>
-            <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
-              Hand-picked, professionally managed, ready when you arrive.
-            </h2>
+            <OurCabinsHeading />
           </div>
           <Link
             href="/cabins"
