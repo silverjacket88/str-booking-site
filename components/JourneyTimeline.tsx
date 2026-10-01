@@ -28,13 +28,16 @@ const steps = [
 
 export default function JourneyTimeline() {
   return (
-    <div className="grid gap-8 md:grid-cols-5 md:gap-6">
+    <div className="grid gap-5 md:grid-cols-5">
       {steps.map((step) => (
-        <div key={step.number}>
-          <p className="font-display text-2xl tracking-tight text-forest-light">
+        <div
+          key={step.number}
+          className="rounded-lg border border-line/60 bg-paper p-6 shadow-[0_8px_24px_-16px_rgba(38,36,31,0.25)]"
+        >
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-forest font-display text-sm text-cream">
             {step.number}
-          </p>
-          <h3 className="mt-3 font-display text-lg tracking-tight text-ink">{step.title}</h3>
+          </div>
+          <h3 className="mt-4 font-display text-lg tracking-tight text-ink">{step.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
         </div>
       ))}
