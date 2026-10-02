@@ -6,9 +6,9 @@ import SearchWidget from "@/components/SearchWidget";
 import StatsBar from "@/components/StatsBar";
 import AmenityChips from "@/components/AmenityChips";
 import PropertyCard from "@/components/PropertyCard";
-import JourneyTimeline from "@/components/JourneyTimeline";
-import StayTimeline from "@/components/StayTimeline";
+import GuestJourneyCarousel from "@/components/GuestJourneyCarousel";
 import ReviewCard from "@/components/ReviewCard";
+import SwipeCarousel from "@/components/SwipeCarousel";
 import PhotoMarquee from "@/components/PhotoMarquee";
 import LocalFunFacts from "@/components/LocalFunFacts";
 import WhereWeOperateHeading from "@/components/WhereWeOperateHeading";
@@ -125,62 +125,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why book direct */}
-      <section className="border-y border-line/60 bg-cream-dark/50 py-16">
+      {/* Guest journey (merged "why book direct" + "guest journey") */}
+      <section className="border-y border-line/60 bg-forest/5 py-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            Why guests book direct
+            The comfort of home. Your home away from home in the Smokies.
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            A stay that feels easy, from search to checkout.
+            The Alderford difference &amp; why guests love booking direct with us.
           </h2>
           <div className="mt-10">
-            <JourneyTimeline />
+            <GuestJourneyCarousel />
           </div>
         </div>
       </section>
 
-      {/* Guest journey */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-          The guest journey
-        </p>
-        <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          From first click to checkout, seamlessly.
-        </h2>
-        <div className="mt-10">
-          <StayTimeline />
-        </div>
-      </section>
-
       {/* Fun facts about the area */}
-      <section id="fun-facts" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16">
-        <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-          While you&apos;re here
-        </p>
-        <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          A few fun facts about {market.name}.
-        </h2>
-        <div className="mt-10">
-          <LocalFunFacts />
+      <section
+        id="fun-facts"
+        className="scroll-mt-24 border-y border-line/60 bg-gold/8 py-16"
+      >
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-forest">
+            While you&apos;re here
+          </p>
+          <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
+            A few fun facts about the Smokies.
+          </h2>
+          <div className="mt-10">
+            <LocalFunFacts />
+          </div>
         </div>
       </section>
 
       {/* Reviews */}
-      <section className="border-y border-line/60 bg-cream-dark/50 py-16">
+      <section className="border-y border-line/60 bg-cream-dark py-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            What guests say
+            Why guests love us
           </p>
           <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
-            {avgRating.toFixed(2)} out of 5, every time.
+            {`${avgRating.toFixed(2)} out of 5. Here's why.`}
           </h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {reviews
-              .filter((r) => r.featured)
-              .map((r) => (
-                <ReviewCard key={r.id} review={r} />
-              ))}
+          <div className="mt-10">
+            <SwipeCarousel>
+              {reviews
+                .filter((r) => r.featured)
+                .map((r) => (
+                  <ReviewCard key={r.id} review={r} />
+                ))}
+            </SwipeCarousel>
           </div>
         </div>
       </section>

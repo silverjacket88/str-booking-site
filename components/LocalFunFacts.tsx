@@ -1,13 +1,14 @@
 import AnimatedNumber from "@/components/AnimatedNumber";
+import SwipeCarousel from "@/components/SwipeCarousel";
 import { funFacts } from "@/lib/data/funFacts";
 
 export default function LocalFunFacts() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <SwipeCarousel>
       {funFacts.map((fact) => (
         <div
           key={fact.label}
-          className="rounded-lg border border-line bg-paper p-6 text-center"
+          className="flex h-full flex-col items-center rounded-2xl border border-line bg-paper p-6 text-center"
         >
           <span className="text-3xl">{fact.emoji}</span>
           <p className="mt-3 font-display text-3xl tracking-tight text-forest">
@@ -22,6 +23,6 @@ export default function LocalFunFacts() {
           <p className="mt-2 text-xs leading-relaxed text-ink-soft">{fact.note}</p>
         </div>
       ))}
-    </div>
+    </SwipeCarousel>
   );
 }

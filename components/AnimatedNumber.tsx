@@ -70,7 +70,10 @@ export default function AnimatedNumber({
   return (
     <span ref={ref}>
       {prefix}
-      {display.toFixed(decimals)}
+      {display.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}
       {suffix}
     </span>
   );
