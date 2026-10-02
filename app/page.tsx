@@ -181,14 +181,16 @@ export default function HomePage() {
 
       {/* About */}
       <section className="mx-auto max-w-5xl px-6 py-20 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wider text-forest">About us</p>
-        <h2 className="mx-auto mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          {siteConfig.founderStoryTitle}
-        </h2>
-        <div className="mx-auto mt-6 max-w-2xl space-y-4 text-ink-soft">
-          {siteConfig.founderStory.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        <div className="mx-auto max-w-2xl rounded-lg border border-line bg-paper p-8 md:p-10">
+          <p className="text-xs font-semibold uppercase tracking-wider text-forest">About us</p>
+          <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
+            {siteConfig.founderStoryTitle}
+          </h2>
+          <div className="mt-6 space-y-4 text-ink-soft">
+            {siteConfig.founderStory.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
         </div>
       </section>
 
