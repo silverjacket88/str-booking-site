@@ -127,7 +127,7 @@ export default function HomePage() {
             Alderford Homes direct booking + guest experience
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            Providing our guests with &quot;Your home away from home&quot; in the Smokies.
+            Home away from home - right here in the Smokies.
           </h2>
           <div className="mt-10">
             <GuestJourneyCarousel />
