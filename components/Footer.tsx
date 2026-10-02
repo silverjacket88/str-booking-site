@@ -66,7 +66,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-ink-soft hover:text-forest"
                 >
-                  Let us handle your property for you
+                  Property Owners
                 </a>
               </li>
               <li>
@@ -82,7 +82,6 @@ export default function Footer() {
               Get in touch
             </p>
             <ul className="mt-4 space-y-2 text-sm text-ink-soft">
-              <li>{market.name}, {market.state}</li>
               <li>{siteConfig.supportPhoneDisplay}</li>
               <li>
                 <a href={`mailto:${siteConfig.supportEmail}`} className="hover:text-forest">
@@ -93,9 +92,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-xs text-ink-soft md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 border-t border-line pt-6 text-xs text-ink-soft">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p>Family-run cabins in {market.name}, {market.state}.</p>
         </div>
       </div>
     </footer>

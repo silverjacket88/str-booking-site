@@ -8,9 +8,17 @@ export interface Stat {
   suffix?: string;
 }
 
+const DESKTOP_COLS: Record<number, string> = {
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+};
+
 export default function StatsBar({ stats }: { stats: Stat[] }) {
+  const desktopCols = DESKTOP_COLS[stats.length] ?? "md:grid-cols-4";
+
   return (
-    <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-10">
+    <div className={`grid grid-cols-2 gap-6 text-center md:gap-10 ${desktopCols}`}>
       {stats.map((s) => (
         <div key={s.label}>
           <p className="font-display text-3xl tracking-tight text-ink md:text-4xl">

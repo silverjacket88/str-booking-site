@@ -46,11 +46,6 @@ export default function HomePage() {
               { value: properties.length, label: "Handpicked Stays" },
               { value: `${market.name}, ${market.state}`, label: "Prime Smoky Location" },
               { value: avgRating, decimals: 2, label: "Guest Approved" },
-              {
-                value: siteConfig.stats.avgResponseMinutes,
-                suffix: "min",
-                label: "Here When You Need Us",
-              },
             ]}
           />
         </div>
@@ -69,7 +64,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The area */}
+      {/*
+        PARKED SECTION - "The Smoky Mountains are calling" area block.
+        Removed 2026-10-02 at the user's request to simplify page flow.
+        To restore, say "bring back the area section" (or "restore the parked area section").
+
       <section className="border-y border-line/60 bg-cream-dark/50 py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center">
           <div>
@@ -95,11 +94,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Photo marquee */}
-      <section className="py-12">
-        <PhotoMarquee />
-      </section>
+      */}
 
       {/* Our cabins */}
       <section className="mx-auto max-w-7xl px-6 py-16">
@@ -129,10 +124,10 @@ export default function HomePage() {
       <section className="border-y border-line/60 bg-forest/5 py-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            The comfort of home. Your home away from home in the Smokies.
+            Alderford Homes direct booking + guest experience
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            The Alderford booking direct difference
+            Providing our guests with &quot;Your home away from home&quot; in the Smokies.
           </h2>
           <div className="mt-10">
             <GuestJourneyCarousel />
@@ -177,6 +172,11 @@ export default function HomePage() {
             </SwipeCarousel>
           </div>
         </div>
+      </section>
+
+      {/* Photo marquee */}
+      <section className="py-12">
+        <PhotoMarquee />
       </section>
 
       {/* About */}
