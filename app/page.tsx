@@ -129,10 +129,10 @@ export default function HomePage() {
       <section className="border-y border-line/60 bg-forest/5 py-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            The Alderford booking direct difference
+            The comfort of home. Your home away from home in the Smokies.
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            The comfort of home, your home away from home in the Smokies.
+            The Alderford booking direct difference
           </h2>
           <div className="mt-10">
             <GuestJourneyCarousel />
@@ -189,14 +189,6 @@ export default function HomePage() {
           {siteConfig.founderStory.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
-        </div>
-        <div className="mt-10">
-          <Link
-            href="/about"
-            className="inline-block rounded-full border border-forest px-6 py-2.5 text-sm font-medium text-forest hover:bg-forest hover:text-cream"
-          >
-            Read more →
-          </Link>
         </div>
       </section>
 

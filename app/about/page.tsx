@@ -45,7 +45,7 @@ export default function AboutPage() {
         <div className="rounded-lg bg-forest p-8 text-cream">
           <h2 className="font-display text-2xl tracking-tight">Planning a trip?</h2>
           <p className="mt-2 text-cream/80">
-            Browse all three cabins and book direct — no platform fees.
+            Browse all {properties.length} cabins and book direct — no platform fees.
           </p>
           <Link
             href="/cabins"
