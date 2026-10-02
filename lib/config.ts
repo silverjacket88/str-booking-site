@@ -16,6 +16,9 @@ export const siteConfig = {
   whatsappNumber: "18652146377",
   supportEmail: "stay@alderfordhomes.com",
   ownerEmail: "owners@alderfordhomes.com",
+  // GHL-hosted property owner inquiry funnel (captures leads, tags them, and
+  // creates an opportunity in the Cabin Co-Hosting Acquisition pipeline).
+  ownerFunnelUrl: "https://api.leadconnectorhq.com/widget/form/oNMjxvoPlyG5PkvSaAgD",
   stats: {
     homes: 0, // derived at build time from data, kept here as fallback
     avgRating: 4.96,

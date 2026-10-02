@@ -60,6 +60,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <a
+                  href={siteConfig.ownerFunnelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink-soft hover:text-forest"
+                >
+                  Let us handle your property for you
+                </a>
+              </li>
+              <li>
                 <Link href="/contact" className="text-ink-soft hover:text-forest">
                   Contact
                 </Link>
