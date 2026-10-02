@@ -129,10 +129,10 @@ export default function HomePage() {
       <section className="border-y border-line/60 bg-forest/5 py-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            The comfort of home. Your home away from home in the Smokies.
+            The Alderford booking direct difference
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            The Alderford difference &amp; why guests love booking direct with us.
+            The comfort of home, your home away from home in the Smokies.
           </h2>
           <div className="mt-10">
             <GuestJourneyCarousel />
