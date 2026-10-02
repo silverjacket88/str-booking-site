@@ -41,27 +41,27 @@ export const weekdayConversations: Record<number, QAPair[]> = {
     { q: p("Made it to Wednesday?"), a: "Reward yourself. Book the getaway." },
     { q: p("Running on fumes this week?"), a: "A hot tub and mountain air will fix that." },
     { q: p("Wednesday dragging?"), a: "Not as much as it would without a trip to look forward to." },
-    { q: p("What gets you through hump day?"), a: "Knowing the weekend — and the Smokies — are close." },
+    { q: p("What gets you through hump day?"), a: "Knowing the weekend - and the Smokies - are close." },
     { q: p("Ready for a change of scenery yet?"), a: "We've got cabins to spare." },
     { q: p("Is the week almost over?"), a: "Almost. Start planning the reward." },
     { q: p("What's the move this weekend?"), a: "Might we suggest a cabin in the Smokies?" },
   ],
   // Thursday — close to the weekend
   4: [
-    { q: p("It's Thursday — what are you doing this weekend?"), a: "If it's not the Smokies, we'd love to change your mind." },
-    { q: p("Almost there — feel it?"), a: "The weekend's close. So is your next getaway." },
+    { q: p("It's Thursday - what are you doing this weekend?"), a: "If it's not the Smokies, we'd love to change your mind." },
+    { q: p("Almost there - feel it?"), a: "The weekend's close. So is your next getaway." },
     { q: p("One more day to go?"), a: "One more day until mountain views. Worth it." },
     { q: p("Thursday thoughts?"), a: "Mostly about hot tubs and fire pits, if we're honest." },
     { q: p("Weekend plans coming together?"), a: "They could include a cabin. Just saying." },
     { q: p("Can you feel Friday coming?"), a: "We can. Pack light, we'll handle the rest." },
-    { q: p("Thursday — the quiet before the weekend?"), a: "Or the start of booking your escape." },
+    { q: p("Thursday - the quiet before the weekend?"), a: "Or the start of booking your escape." },
     { q: p("What would make this weekend great?"), a: "A porch, a view, and zero notifications." },
     { q: p("Still deciding on weekend plans?"), a: "Decide fast. Good cabins go quick." },
-    { q: p("Is it the weekend yet?"), a: "Almost. Get ahead of it — book today." },
+    { q: p("Is it the weekend yet?"), a: "Almost. Get ahead of it - book today." },
   ],
   // Friday — happy Friday, weekend launch
   5: [
-    { q: p("Happy Friday — what's the plan?"), a: "Disappearing to the Smokies. Booking a cabin up there. See you guys." },
+    { q: p("Happy Friday - what's the plan?"), a: "Disappearing to the Smokies. Booking a cabin up there. See you guys." },
     { q: p("Made it to Friday!"), a: "Just in time to book a cabin for the weekend." },
     { q: p("Big plans tonight?"), a: "Packing. We're heading for the mountains." },
     { q: p("Friday feeling good?"), a: "Even better with a cabin booked." },
@@ -74,12 +74,12 @@ export const weekdayConversations: Record<number, QAPair[]> = {
   ],
   // Saturday — out and gone
   6: [
-    { q: p("It's Saturday — where'd everyone go?"), a: "The Smokies, probably. See you guys, we're leaving too." },
+    { q: p("It's Saturday - where'd everyone go?"), a: "The Smokies, probably. See you guys, we're leaving too." },
     { q: p("Big Saturday plans?"), a: "Porch, coffee, mountain view. Already living it." },
     { q: p("Who's out of town this weekend?"), a: "We are. Saturday in the Smokies, no regrets." },
     { q: p("Saturday morning thoughts?"), a: "Mostly just this view. Worth the drive." },
     { q: p("Where's the best place to be on a Saturday?"), a: "A cabin deck, hands down." },
-    { q: p("Anyone still in town this weekend?"), a: "Not us. Catch you Monday — we're in the mountains." },
+    { q: p("Anyone still in town this weekend?"), a: "Not us. Catch you Monday - we're in the mountains." },
     { q: p("What's a perfect Saturday look like?"), a: "This. Exactly this view." },
     { q: p("Saturday plans better than ours?"), a: "Doubtful. We're by the fire pit already." },
     { q: p("Taking the weekend off?"), a: "Fully. Smokies, hot tub, silence." },
@@ -87,7 +87,7 @@ export const weekdayConversations: Record<number, QAPair[]> = {
   ],
   // Sunday — weekend recap, reluctant to leave
   0: [
-    { q: p("Happy Sunday — how was your weekend?"), a: "Great, thanks. Been holed up in a mountain cabin enjoying this view." },
+    { q: p("Happy Sunday - how was your weekend?"), a: "Great, thanks. Been holed up in a mountain cabin enjoying this view." },
     { q: p("Sunday scaries setting in?"), a: "Not here. Just one more coffee on this porch." },
     { q: p("How do you spend a Sunday right?"), a: "Slowly. Preferably with a mountain view." },
     { q: p("Weekend treating you well?"), a: "Extremely. Haven't left the hot tub much." },
@@ -102,7 +102,7 @@ export const weekdayConversations: Record<number, QAPair[]> = {
 
 export const holidayConversations: Record<string, QAPair[]> = {
   thanksgiving: [
-    { q: p("Thanksgiving coming up — hosting this year?"), a: "Or escaping it entirely. A cabin works for both." },
+    { q: p("Thanksgiving coming up - hosting this year?"), a: "Or escaping it entirely. A cabin works for both." },
     { q: p("Need a break before the holiday chaos?"), a: "Book it now, thank yourself later." },
     { q: p("Turkey day plans set yet?"), a: "Ours involve a mountain view instead of dish duty." },
   ],
@@ -113,7 +113,7 @@ export const holidayConversations: Record<string, QAPair[]> = {
   ],
   easter: [
     { q: p("Easter plans with the family?"), a: "A cabin in the Smokies fits the whole crew." },
-    { q: p("Spring in the mountains sound nice?"), a: "It does. Fire pits and dogwoods — a great combo." },
+    { q: p("Spring in the mountains sound nice?"), a: "It does. Fire pits and dogwoods - a great combo." },
     { q: p("Egg hunt indoors or out this year?"), a: "Our decks have plenty of hiding spots." },
   ],
   springbreak: [

@@ -152,7 +152,7 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
               Where you&apos;ll be
             </h2>
             <div className="mt-4 flex h-56 items-center justify-center rounded-lg border border-line/60 bg-cream-dark text-sm text-ink-soft">
-              Map preview — exact address sent after booking
+              Map preview - exact address sent after booking
             </div>
             <p className="mt-3 text-sm text-ink-soft">
               This cabin is located in {property.city}, {property.state}. After your booking

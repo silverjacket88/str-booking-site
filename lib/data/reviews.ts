@@ -166,7 +166,7 @@ export const reviews: Review[] = [
     initials: "AS",
     propertyName: "The WTH Cabin",
     quote:
-      "Absolutely INCREDIBLE cabin!!! The view seriously feels like you’re in a painting. The basement is a kid’s dream — so much fun stuff to do. All the bedrooms are beautiful, but the best part of the...",
+      "Absolutely INCREDIBLE cabin!!! The view seriously feels like you’re in a painting. The basement is a kid’s dream - so much fun stuff to do. All the bedrooms are beautiful, but the best part of the...",
     rating: 5,
     monthYear: "July 2026",
     featured: true,

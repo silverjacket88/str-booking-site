@@ -40,7 +40,7 @@ export default function ContactForm({
   if (status === "sent") {
     return (
       <div className="rounded-lg border border-forest/30 bg-forest/10 p-6 text-forest-dark">
-        <p className="font-display text-xl">Thanks — message received.</p>
+        <p className="font-display text-xl">Thanks - message received.</p>
         <p className="mt-1 text-sm">We&apos;ll get back to you shortly.</p>
       </div>
     );

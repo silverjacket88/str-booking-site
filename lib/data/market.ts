@@ -11,6 +11,6 @@ export const market: Market = {
   state: "TN",
   towns: ["Sevierville", "Pigeon Forge", "Gatlinburg"],
   blurb:
-    "Minutes from Dollywood and the entrance to Great Smoky Mountains National Park — ridge views, hot tubs, and small-town Smokies charm.",
+    "Minutes from Dollywood and the entrance to Great Smoky Mountains National Park - ridge views, hot tubs, and small-town Smokies charm.",
   heroImage: "https://picsum.photos/seed/sevierville-hero/1600/900",
 };

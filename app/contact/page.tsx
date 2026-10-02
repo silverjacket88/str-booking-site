@@ -15,7 +15,7 @@ export default function ContactPage() {
         We&apos;re a text or call away.
       </h1>
       <p className="mt-4 text-ink-soft">
-        Questions about a stay, a home you&apos;re considering, or anything else — a real
+        Questions about a stay, a home you&apos;re considering, or anything else - a real
         person on our team will get back to you, usually within {siteConfig.stats.avgResponseMinutes} minutes.
       </p>
 
@@ -33,7 +33,7 @@ export default function ContactPage() {
       </div>
 
       <div className="mt-10 rounded-lg border border-line/60 bg-paper p-8">
-        <ContactForm messagePlaceholder="Tell us what you need — a specific home, dates, or a general question." />
+        <ContactForm messagePlaceholder="Tell us what you need - a specific home, dates, or a general question." />
       </div>
     </div>
   );

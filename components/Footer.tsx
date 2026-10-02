@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
             <p className="mt-1 text-sm text-ink-soft">
               Promotions, seasonal deals, and things happening around {market.name}
-              {" "}— a few emails a month, nothing more.
+              {" "}- a few emails a month, nothing more.
             </p>
           </div>
           <div className="md:w-auto">
@@ -57,11 +57,6 @@ export default function Footer() {
               <li>
                 <Link href="/about" className="text-ink-soft hover:text-forest">
                   About
-                </Link>
-              </li>
-              <li>
-                <Link href="/for-owners" className="text-ink-soft hover:text-forest">
-                  For property owners
                 </Link>
               </li>
               <li>

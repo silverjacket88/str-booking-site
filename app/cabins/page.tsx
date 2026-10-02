@@ -30,7 +30,7 @@ export default async function CabinsPage({
       <p className="mt-4 max-w-2xl text-ink-soft">
         All {properties.length}{" "}
         cabins are professionally managed and inspected before your arrival. Filter by
-        size, or just browse — there aren&apos;t many, so it won&apos;t take long.
+        size, or just browse - there aren&apos;t many, so it won&apos;t take long.
       </p>
 
       <div className="mt-10">

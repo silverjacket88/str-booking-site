@@ -192,36 +192,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dual CTA */}
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-20 md:grid-cols-2">
-        <div className="rounded-lg bg-forest p-10 text-cream">
-          <h3 className="font-display text-2xl tracking-tight">Ready to book your next trip?</h3>
-          <p className="mt-3 text-cream/80">
-            Browse all {properties.length} cabins in {market.name}, {market.state}. Book direct
-            and skip the platform fees.
-          </p>
-          <Link
-            href="/cabins"
-            className="mt-6 inline-block rounded-full bg-cream px-6 py-2.5 text-sm font-medium text-forest-dark hover:bg-cream-dark"
-          >
-            Browse all cabins →
-          </Link>
-        </div>
-        <div className="rounded-lg border border-line bg-paper p-10">
-          <h3 className="font-display text-2xl tracking-tight text-ink">
-            Want to earn more from your rental?
-          </h3>
-          <p className="mt-3 text-ink-soft">
-            We manage the whole thing — pricing, guests, maintenance, and deposits. Get a
-            free rental review and see what your property could earn.
-          </p>
-          <Link
-            href="/for-owners"
-            className="mt-6 inline-block rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] hover:bg-forest-dark"
-          >
-            Get a free rental review →
-          </Link>
-        </div>
+      {/* Bottom booking bar */}
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <SearchWidget />
       </section>
     </>
   );

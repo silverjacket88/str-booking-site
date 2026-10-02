@@ -32,7 +32,7 @@ export default function NewsletterSignup() {
   if (status === "sent") {
     return (
       <p className="text-sm font-medium text-forest">
-        You&apos;re on the list — watch your inbox for specials and local events.
+        You&apos;re on the list - watch your inbox for specials and local events.
       </p>
     );
   }

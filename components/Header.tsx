@@ -17,7 +17,7 @@ export default function Header() {
             {siteConfig.name}
           </span>
           <span className="text-[10px] font-light uppercase tracking-[0.48em] text-forest-dark">
-            — {siteConfig.brandTagline} —
+            - {siteConfig.brandTagline} -
           </span>
         </Link>
 

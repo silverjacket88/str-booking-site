@@ -11,19 +11,19 @@ export const metadata: Metadata = {
 const benefits = [
   {
     title: "Dynamic pricing, done for you",
-    body: "We adjust rates against local demand, events, and competitor pricing — no spreadsheets, no guesswork.",
+    body: "We adjust rates against local demand, events, and competitor pricing - no spreadsheets, no guesswork.",
   },
   {
     title: "Guest communication, handled",
     body: "24/7 messaging, screening, and support so you're never the one fielding a 2 AM text about the wifi password.",
   },
   {
-    title: "We live here — maintenance is local",
+    title: "We live here - maintenance is local",
     body: "We're not dispatching a national call center. If something breaks, it's fixed by someone who lives ten minutes away.",
   },
   {
     title: "Transparent monthly reporting",
-    body: "Know exactly what you earned, what was spent, and why — with an owner portal you can check anytime.",
+    body: "Know exactly what you earned, what was spent, and why - with an owner portal you can check anytime.",
   },
   {
     title: "Multi-channel distribution",
@@ -47,7 +47,7 @@ export default function ForOwnersPage() {
             Want to earn more from your {market.name} rental?
           </h1>
           <p className="mt-4 text-lg text-cream/90">
-            We only manage a handful of cabins, all in {market.name} — pricing, guests,
+            We only manage a handful of cabins, all in {market.name} - pricing, guests,
             maintenance, and deposits, done by people who live here.
           </p>
           <a
@@ -80,7 +80,7 @@ export default function ForOwnersPage() {
           </h2>
           <p className="mt-3 text-ink-soft">
             Tell us a bit about your property in {market.name}{" "}
-            and we&apos;ll follow up with a projected revenue estimate — no obligation.
+            and we&apos;ll follow up with a projected revenue estimate - no obligation.
           </p>
           <div className="mt-8 rounded-lg border border-line bg-paper p-8">
             <ContactForm

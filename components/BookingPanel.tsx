@@ -52,11 +52,11 @@ export default function BookingPanel({ property }: { property: Property }) {
   return (
     <div className="rounded-lg border border-line/60 bg-paper p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Check-in</p>
-      <p className="font-display text-lg text-ink">{checkIn || "—"}</p>
+      <p className="font-display text-lg text-ink">{checkIn || "-"}</p>
       <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-soft">
         Check-out
       </p>
-      <p className="font-display text-lg text-ink">{checkOut || "—"}</p>
+      <p className="font-display text-lg text-ink">{checkOut || "-"}</p>
 
       <div className="mt-4 flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Guests</p>
@@ -120,7 +120,7 @@ export default function BookingPanel({ property }: { property: Property }) {
 
       {confirmation && confirmation.confirmationCode === "REDIRECT" ? (
         <div className="mt-6 rounded-lg bg-forest/10 p-4 text-sm text-forest-dark">
-          {/* Same-tab navigation, not a popup or iframe — a plain
+          {/* Same-tab navigation, not a popup or iframe - a plain
               top-level page navigating itself normally, so none of the
               cross-origin iframe navigation restrictions that broke the
               embedded version apply here. */}
@@ -154,7 +154,7 @@ export default function BookingPanel({ property }: { property: Property }) {
       <div className="mt-6 rounded-lg border border-line/60 p-4 text-xs text-ink-soft">
         <p className="font-medium text-ink">Lowest price, guaranteed.</p>
         <p className="mt-1">
-          Same home, same dates, less money — no platform fees added on top like Airbnb or
+          Same home, same dates, less money - no platform fees added on top like Airbnb or
           Vrbo. Find these dates cheaper elsewhere and we&apos;ll match it.
         </p>
       </div>

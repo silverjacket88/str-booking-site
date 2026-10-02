@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const HEADLINES = [
-  "Mountain or river — pick your escape.",
+  "Mountain or river - pick your escape.",
   "Small portfolio, big standards.",
   "Prime locations, real hospitality, no surprises.",
 ];
