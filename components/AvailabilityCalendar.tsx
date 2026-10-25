@@ -43,20 +43,28 @@ export default function AvailabilityCalendar({
   const [result, setResult] = useState<{ key: string; days: Record<string, DayRate> } | null>(
     null
   );
-  const loading = result?.key !== requestKey;
+  const [error, setError] = useState(false);
+  const loading = !error && result?.key !== requestKey;
   const days = result?.key === requestKey ? result.days : {};
 
   useEffect(() => {
     let cancelled = false;
+    setError(false);
     fetch(
       `/api/availability?propertyId=${propertyId}&start=${toISO(today)}&end=${toISO(rangeEnd)}`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load availability");
+        return res.json();
+      })
       .then((data: { days: DayRate[] }) => {
         if (cancelled) return;
         const map: Record<string, DayRate> = {};
         data.days.forEach((d) => (map[d.date] = d));
         setResult({ key: requestKey, days: map });
+      })
+      .catch(() => {
+        if (!cancelled) setError(true);
       });
     return () => {
       cancelled = true;
@@ -99,6 +107,12 @@ export default function AvailabilityCalendar({
         ))}
       </div>
       {loading && <p className="mt-3 text-xs text-ink-soft">Loading availability…</p>}
+      {error && (
+        <p className="mt-3 text-xs text-red-700">
+          Couldn&apos;t load availability right now. Please refresh, or contact us to check
+          dates directly.
+        </p>
+      )}
     </div>
   );
 }
@@ -140,7 +154,10 @@ function MonthGrid({
           const info = days[date];
           const inRange = checkIn && checkOut && date > checkIn && date < checkOut;
           const isEdge = date === checkIn || date === checkOut;
-          const unavailable = info ? !info.available : false;
+          // Default to blocked, not open, when we don't have real data yet
+          // (still loading, or the availability call failed) - a date
+          // should never look clickable before we actually know it's free.
+          const unavailable = info ? !info.available : true;
 
           return (
             <button

@@ -14,6 +14,13 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const days = await pms.getAvailability(propertyId, start, end);
-  return Response.json({ days });
+  try {
+    const days = await pms.getAvailability(propertyId, start, end);
+    return Response.json({ days });
+  } catch (err) {
+    return Response.json(
+      { error: err instanceof Error ? err.message : "Unable to load availability." },
+      { status: 500 }
+    );
+  }
 }

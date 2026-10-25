@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/lib/config";
 import { market } from "@/lib/data/market";
 
 export const metadata: Metadata = {
   title: "For Property Owners",
   description: `Hands-on, boutique cabin management in ${market.name}, ${market.state}.`,
+  alternates: { canonical: "/for-owners" },
 };
 
 const benefits = [
@@ -82,19 +82,19 @@ export default function ForOwnersPage() {
             Tell us a bit about your property in {market.name}{" "}
             and we&apos;ll follow up with a projected revenue estimate - no obligation.
           </p>
-          <div className="mt-8 rounded-lg border border-line bg-paper p-8">
-            <ContactForm
-              endpoint="/api/owner-inquiry"
-              submitLabel="Request my free review"
-              messagePlaceholder="Property address, bedroom count, and anything else worth knowing."
-              extraFields={
-                <input
-                  name="propertyAddress"
-                  placeholder="Property address in Sevierville, TN"
-                  className="w-full rounded-lg border border-line bg-paper px-3 py-2.5 text-sm focus:border-forest focus:outline-none"
-                />
-              }
-            />
+          <div className="mt-8 rounded-lg border border-line bg-paper p-8 text-center">
+            <p className="text-ink-soft">
+              Tell us about your property and we&apos;ll follow up with a projected revenue
+              estimate.
+            </p>
+            <a
+              href={siteConfig.ownerFunnelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block rounded-full bg-forest px-7 py-3 text-sm font-medium text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] hover:bg-forest-dark"
+            >
+              Request my free review →
+            </a>
           </div>
           <p className="mt-6 text-xs text-ink-soft">
             Prefer to talk it through? Call {siteConfig.supportPhoneDisplay} or email{" "}

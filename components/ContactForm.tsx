@@ -1,47 +1,60 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { siteConfig } from "@/lib/config";
 
 export default function ContactForm({
-  endpoint = "/api/contact",
+  toEmail = siteConfig.supportEmail,
+  subjectPrefix = "Website inquiry",
   messageLabel = "Message",
   messagePlaceholder = "How can we help?",
   submitLabel = "Send message",
   extraFields,
 }: {
-  endpoint?: string;
+  toEmail?: string;
+  subjectPrefix?: string;
   messageLabel?: string;
   messagePlaceholder?: string;
   submitLabel?: string;
   extraFields?: React.ReactNode;
 }) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sent">("idle");
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  // There's no email/CRM backend wired up for this form yet, so submitting
+  // opens the guest's own mail client with everything pre-filled - that
+  // guarantees the message actually reaches us instead of silently
+  // vanishing into an API route that doesn't send anywhere.
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
 
-    try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      setStatus("sent");
-      form.reset();
-    } catch {
-      setStatus("error");
-    }
+    const bodyLines = Object.entries(data)
+      .filter(([, value]) => value)
+      .map(([key, value]) => `${key}: ${value}`);
+
+    const subject = `${subjectPrefix} from ${data.name || "the website"}`;
+    const mailto = `mailto:${toEmail}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+    window.location.href = mailto;
+    setStatus("sent");
+    form.reset();
   }
 
   if (status === "sent") {
     return (
       <div className="rounded-lg border border-forest/30 bg-forest/10 p-6 text-forest-dark">
-        <p className="font-display text-xl">Thanks - message received.</p>
-        <p className="mt-1 text-sm">We&apos;ll get back to you shortly.</p>
+        <p className="font-display text-xl">Almost there.</p>
+        <p className="mt-1 text-sm">
+          Your email app should have opened with everything filled in - just hit send. If
+          nothing opened, email us directly at{" "}
+          <a href={`mailto:${toEmail}`} className="underline">
+            {toEmail}
+          </a>
+          .
+        </p>
       </div>
     );
   }
@@ -79,14 +92,10 @@ export default function ContactForm({
       />
       <button
         type="submit"
-        disabled={status === "submitting"}
-        className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-cream hover:bg-forest-dark disabled:opacity-60"
+        className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-cream hover:bg-forest-dark"
       >
-        {status === "submitting" ? "Sending…" : submitLabel}
+        {submitLabel}
       </button>
-      {status === "error" && (
-        <p className="text-sm text-red-700">Something went wrong. Please try again.</p>
-      )}
     </form>
   );
 }
