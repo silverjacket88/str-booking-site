@@ -3,9 +3,14 @@ import CabinsBrowser from "@/components/CabinsBrowser";
 import { properties } from "@/lib/data/properties";
 import { market } from "@/lib/data/market";
 
+const title = `Cabin Rentals in ${market.towns.join(", ")}, ${market.state}`;
+const description = `Browse all ${properties.length} hand-picked cabins in ${market.towns.join(", ")} - hot tubs, mountain views, and direct booking with no platform fees.`;
+
 export const metadata: Metadata = {
-  title: "Our Cabins",
-  description: `Browse all ${properties.length} cabins in ${market.name}, ${market.state}.`,
+  title,
+  description,
+  alternates: { canonical: "/cabins" },
+  openGraph: { title, description, url: "/cabins" },
 };
 
 function firstValue(v: string | string[] | undefined): string | undefined {

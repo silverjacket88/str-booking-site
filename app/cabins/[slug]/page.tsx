@@ -7,6 +7,10 @@ import { getAmenityTag } from "@/lib/data/amenityTags";
 import PropertyGallery from "@/components/PropertyGallery";
 import AmenitiesList from "@/components/AmenitiesList";
 import BookingPanel from "@/components/BookingPanel";
+import StructuredData from "@/components/StructuredData";
+import { propertyJsonLd, breadcrumbJsonLd } from "@/lib/seo/structuredData";
+import { siteConfig } from "@/lib/config";
+import { market } from "@/lib/data/market";
 
 export function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }));
@@ -18,9 +22,24 @@ export async function generateMetadata(props: {
   const { slug } = await props.params;
   const property = getProperty(slug);
   if (!property) return {};
+  const title = `${property.name} - ${market.name}, ${market.state} Cabin Rental`;
+  const description = `${property.tagline} Sleeps ${property.maxGuests}, ${property.bedrooms} bedrooms. ${property.rating.toFixed(2)} stars (${property.reviewCount} reviews). From $${property.basePrice}/night, book direct - no platform fees.`;
   return {
-    title: property.name,
-    description: property.tagline,
+    title,
+    description,
+    alternates: { canonical: `/cabins/${property.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `${siteConfig.url}/cabins/${property.slug}`,
+      images: property.images.slice(0, 1).map((url) => ({ url, width: 1200, height: 800 })),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: property.images.slice(0, 1),
+    },
   };
 }
 
@@ -33,6 +52,14 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10">
+      <StructuredData data={propertyJsonLd(property)} />
+      <StructuredData
+        data={breadcrumbJsonLd([
+          { name: "Home", url: siteConfig.url },
+          { name: "Our Cabins", url: `${siteConfig.url}/cabins` },
+          { name: property.name, url: `${siteConfig.url}/cabins/${property.slug}` },
+        ])}
+      />
       <Link href="/cabins" className="text-sm text-ink-soft hover:text-forest">
         ← All cabins
       </Link>

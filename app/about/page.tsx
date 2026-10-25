@@ -5,9 +5,13 @@ import { properties } from "@/lib/data/properties";
 import { market } from "@/lib/data/market";
 import StatsBar from "@/components/StatsBar";
 
+const aboutTitle = `About ${siteConfig.name} - Local Cabin Hosts in ${market.name}, ${market.state}`;
+
 export const metadata: Metadata = {
-  title: "About",
+  title: aboutTitle,
   description: siteConfig.founderStoryTitle,
+  alternates: { canonical: "/about" },
+  openGraph: { title: aboutTitle, description: siteConfig.founderStoryTitle, url: "/about" },
 };
 
 export default function AboutPage() {

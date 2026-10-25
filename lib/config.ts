@@ -1,4 +1,8 @@
 export const siteConfig = {
+  // Canonical production URL — used for metadataBase, sitemap, robots.txt,
+  // and structured data. Correct even before the domain is pointed at
+  // this deploy, since that's the URL all of this is meant to describe.
+  url: "https://alderfordhomes.com",
   name: "Alderford Homes",
   shortName: "Alderford",
   brandTagline: "Hospitality",
