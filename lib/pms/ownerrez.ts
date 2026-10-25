@@ -194,6 +194,13 @@ export const ownerRezPmsAdapter: PmsAdapter = {
       // conflicting/invalid date range returns HTTP 400 with a structured
       // `messages` array (see OwnerRezApiError above), caught below and
       // surfaced as `unavailableReason`.
+      //
+      // `test: true` because `guest_id` is otherwise required (per
+      // OwnerRez's own /v2/quotes docs) and we don't have a guest yet at
+      // this point — this call is only a non-binding price preview. A test
+      // quote is still validated and priced, just not persisted. The real
+      // booking/checkout happens separately on OwnerRez's own hosted
+      // widget (see createBooking below), which collects guest info itself.
       const data = await ownerRezFetch<QuoteViewModel>("/v2/quotes", {
         method: "POST",
         body: JSON.stringify({
@@ -202,6 +209,7 @@ export const ownerRezPmsAdapter: PmsAdapter = {
           departure: request.checkOut,
           adults: request.guests,
           generate_charges: true,
+          test: true,
         }),
       });
 
