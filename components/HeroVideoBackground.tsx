@@ -2,11 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const CLIPS = [
-  "/videos/hero-chairlift.mp4",
-  "/videos/hero-bear.mp4",
-  "/videos/hero-river-autumn.mp4",
-  "/videos/hero-town.mp4",
+// `position` matches CSS object-position - only needed when a clip's
+// subject isn't centered in frame. The bear clip frames the bear near
+// the top of the shot (climbing down a post), so a plain center crop on
+// a wide/short hero cuts its head off, leaving just legs visible -
+// biasing the crop toward the top keeps the whole bear in frame.
+const CLIPS: { src: string; position?: string }[] = [
+  { src: "/videos/hero-chairlift.mp4" },
+  { src: "/videos/hero-bear.mp4", position: "center 15%" },
+  { src: "/videos/hero-river-autumn.mp4" },
+  { src: "/videos/hero-town.mp4" },
 ];
 
 export default function HeroVideoBackground() {
@@ -23,7 +28,7 @@ export default function HeroVideoBackground() {
 
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden bg-ink">
-      {CLIPS.map((src, i) => (
+      {CLIPS.map(({ src, position }, i) => (
         <video
           key={src}
           ref={(el) => {
@@ -32,6 +37,7 @@ export default function HeroVideoBackground() {
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
             i === active ? "opacity-100" : "opacity-0"
           }`}
+          style={position ? { objectPosition: position } : undefined}
           src={src}
           muted
           playsInline
