@@ -3,15 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 // `position` matches CSS object-position - only needed when a clip's
-// subject isn't centered in frame. The bear clip frames the bear near
-// the top of the shot (climbing down a post), so a plain center crop on
-// a wide/short hero cuts its head off, leaving just legs visible -
-// biasing the crop toward the top keeps the whole bear in frame.
+// subject isn't centered in frame.
 const CLIPS: { src: string; position?: string }[] = [
   { src: "/videos/hero-chairlift.mp4" },
-  { src: "/videos/hero-bear.mp4", position: "center 15%" },
+  { src: "/videos/hero-bear.mp4" },
   { src: "/videos/hero-river-autumn.mp4" },
   { src: "/videos/hero-town.mp4" },
+  { src: "/videos/hero-creek-autumn.mp4" },
 ];
 
 export default function HeroVideoBackground() {
