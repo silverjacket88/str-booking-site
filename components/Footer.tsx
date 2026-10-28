@@ -92,8 +92,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-line pt-6 text-xs text-ink-soft">
+        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-xs text-ink-soft sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+          <p className="flex gap-4">
+            <Link href="/privacy" className="hover:text-forest">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-forest">
+              Terms &amp; Conditions
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
