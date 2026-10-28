@@ -132,10 +132,13 @@ interface CalendarPropertyModel {
   days: CalendarDayModel[];
 }
 
-interface QuoteChargeModel {
+export interface QuoteChargeModel {
   type: "rent" | "surcharge" | "tax" | "tax_other" | "surcharge_other";
   description?: string;
   amount: number;
+  is_taxable: boolean;
+  rate: number;
+  rate_is_percent: boolean;
 }
 
 interface QuoteViewModel {
@@ -157,6 +160,36 @@ export const OWNERREZ_PROPERTY_KEYS: Record<string, string> = {
   "480455": "6e8229a102f94317a7eb02acceb90675",
   "361555": "4a53f63795f04414b14eb3d6bb6b5b0c",
 };
+
+/**
+ * Raw OwnerRez quote charges for a stay, or null if the dates aren't
+ * available/bookable. Exposed separately from `getQuote` (which flattens
+ * charges into display-ready line items) because the direct-vs-channel
+ * price comparison feature needs the structured per-charge detail
+ * (is_taxable, rate, rate_is_percent) to recompute channel markup math -
+ * see lib/pricing/channelMarkup.ts.
+ */
+export async function getQuoteCharges(
+  request: QuoteRequest
+): Promise<{ charges: QuoteChargeModel[]; nights: number } | null> {
+  const nights = nightsBetween(request.checkIn, request.checkOut);
+  try {
+    const data = await ownerRezFetch<QuoteViewModel>("/v2/quotes", {
+      method: "POST",
+      body: JSON.stringify({
+        property_id: Number(request.propertyId),
+        arrival: request.checkIn,
+        departure: request.checkOut,
+        adults: request.guests,
+        generate_charges: true,
+        test: true,
+      }),
+    });
+    return { charges: data.charges, nights };
+  } catch {
+    return null;
+  }
+}
 
 export const ownerRezPmsAdapter: PmsAdapter = {
   async listPropertyIds() {

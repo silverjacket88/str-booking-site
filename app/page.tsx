@@ -13,6 +13,7 @@ import PhotoMarquee from "@/components/PhotoMarquee";
 import LocalFunFacts from "@/components/LocalFunFacts";
 import WhereWeOperateHeading from "@/components/WhereWeOperateHeading";
 import OurCabinsHeading from "@/components/OurCabinsHeading";
+import PriceComparisonSection from "@/components/PriceComparisonSection";
 import { market } from "@/lib/data/market";
 import { properties } from "@/lib/data/properties";
 import { reviews } from "@/lib/data/reviews";
@@ -50,6 +51,8 @@ export default function HomePage() {
           />
         </div>
       </section>
+
+      <PriceComparisonSection />
 
       {/* Amenity chips */}
       <section className="mx-auto max-w-7xl px-6 py-16">
