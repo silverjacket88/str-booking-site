@@ -2,6 +2,87 @@ import { BlogPost } from "@/lib/types";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "where-to-eat-in-gatlinburg",
+    title: "Where to Eat in Gatlinburg - A Local's Restaurant Guide",
+    eyebrow: "Restaurant Guide",
+    excerpt:
+      "Pancakes, pit barbecue, tableside steaks, and trout dinners - here's where we actually send guests when they ask where to eat on the Parkway.",
+    readTime: "6 min read",
+    publishedAt: "2026-11-05",
+    heroImage:
+      "https://images.unsplash.com/photo-1755207143391-2b51278bbfe0?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "The Gatlinburg Parkway lined with shops and restaurants on a sunny day",
+    ctaCabinSlug: "chasing-sunset-cabin",
+    ctaHeadline: "A short drive from every spot on this list",
+    ctaBody:
+      "Chasing Sunset Cabin keeps you minutes from the Parkway, so you can actually relax between dinners.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "The Parkway has one of the highest concentrations of restaurants per block of anywhere in the Smokies - which is great until you're standing on the sidewalk trying to pick one. Here's where we actually send guests, organized by what you're in the mood for.",
+      },
+      {
+        kind: "venueGroup",
+        category: "Pancake houses",
+        items: [
+          {
+            name: "Pancake Pantry",
+            pills: ["Est. 1960", "Cash only", "Expect a line"],
+            text: "Tennessee's original pancake house, and the one that started the Parkway's whole pancake-house reputation. Weekend mornings mean a line out the door - they don't take cards, so bring cash.",
+          },
+          {
+            name: "Log Cabin Pancake House",
+            pills: ["Shorter wait"],
+            text: "A reliable second option a short walk away, known for classics like French toast and chocolate-chip pancakes, usually without the same wait as the Pantry.",
+          },
+        ],
+      },
+      {
+        kind: "venueGroup",
+        category: "Pit barbecue",
+        items: [
+          {
+            name: "Bennett's Pit Bar-B-Que",
+            pills: ["Kid-friendly", "Arcade on-site"],
+            text: "Slow-smoked meats with a full arcade and play area attached, which makes it an easy pick with kids in tow.",
+          },
+          {
+            name: "Calhoun's",
+            pills: ["Riverside patio", "Groups"],
+            text: "Award-winning baby back ribs and a patio on the river - a good call for a bigger group that can't agree on one thing.",
+          },
+        ],
+      },
+      {
+        kind: "venueGroup",
+        category: "Steak & trout",
+        items: [
+          {
+            name: "The Peddler Steakhouse",
+            pills: ["Est. 1976", "Tableside cart", "Salad bar"],
+            text: "The Parkway's best-known steakhouse. A peddler wheels a cart tableside so you pick your own cut, and the salad bar is as much a draw as the steak. The building itself dates to 1958.",
+          },
+          {
+            name: "Smoky Mountain Trout House",
+            pills: ["Open 3-9pm", "45+ years"],
+            text: "Rainbow trout and seafood, served for more than 45 years. Opens at 3pm, which makes it a solid choice for a later dinner after a full day in the park.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Hours and open days shift with the season, especially at the smaller, family-run spots - worth a quick call before you walk down.",
+      },
+      {
+        kind: "p",
+        label: "One more stop for the sweet tooth:",
+        text: "Ole Smoky Candy Kitchen has been pulling salt water taffy on the Parkway since 1950 - you can watch it happen through the window before you buy a bag.",
+      },
+    ],
+  },
+  {
     slug: "when-to-see-fall-foliage-smoky-mountains",
     title: "When to See Fall Foliage in the Smoky Mountains - A Local Timing Guide",
     eyebrow: "Local Timing Guide",
@@ -9,7 +90,9 @@ export const blogPosts: BlogPost[] = [
       "The honest answer to \"what's the best weekend for color\" depends on how high up you go. Here's how it rolls downhill over six weeks - and which weekend to book.",
     readTime: "4 min read",
     publishedAt: "2026-10-29",
-    heroMotif: "leaves",
+    heroImage:
+      "https://images.unsplash.com/photo-1793129074330-68112ecc73ab?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Autumn trees in red and gold overlooking the Smoky Mountains",
     ctaCabinSlug: "take-me-to-the-river-cabin",
     ctaHeadline: "See peak color from the riverbank",
     ctaBody:
@@ -64,7 +147,9 @@ export const blogPosts: BlogPost[] = [
       "The park itself is free to enter - your car isn't. Here's what the parking tag costs, where to get one, and the questions we hear every season.",
     readTime: "4 min read",
     publishedAt: "2026-10-22",
-    heroMotif: "map",
+    heroImage:
+      "https://images.unsplash.com/photo-1776617900964-f32497a6988a?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Great Smoky Mountains National Park entrance sign surrounded by forest",
     ctaCabinSlug: "the-wth-cabin",
     ctaHeadline: "Plan your park days from right outside Sevierville",
     ctaBody:
@@ -128,7 +213,9 @@ export const blogPosts: BlogPost[] = [
       "Skip the rookie itinerary. Here's the weekend we'd actually recommend if you want to feel like a local by Sunday.",
     readTime: "5 min read",
     publishedAt: "2026-10-15",
-    heroMotif: "trail",
+    heroImage:
+      "https://images.unsplash.com/photo-1574779580338-4a0d958fdff1?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Visitors crossing the Gatlinburg SkyBridge above the town",
     ctaCabinSlug: "chasing-sunset-cabin",
     ctaHeadline: "A home base right between it all",
     ctaBody:
@@ -180,7 +267,9 @@ export const blogPosts: BlogPost[] = [
       "No technical climbing, no experienced-hiker required - just four trails short enough for kids, all within about 30-45 minutes of Sevierville.",
     readTime: "5 min read",
     publishedAt: "2026-10-08",
-    heroMotif: "hike",
+    heroImage:
+      "https://images.unsplash.com/photo-1758812775423-02d680b70bf7?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Hikers walking beside a small waterfall on a forest trail",
     ctaCabinSlug: "the-wth-cabin",
     ctaHeadline: "Close enough for a pre-nap hike",
     ctaBody:
@@ -236,7 +325,9 @@ export const blogPosts: BlogPost[] = [
       "Thousands of cabins, and most listing photos blur together. Here's what we'd tell a friend to actually check before booking.",
     readTime: "5 min read",
     publishedAt: "2026-10-01",
-    heroMotif: "checklist",
+    heroImage:
+      "https://images.unsplash.com/photo-1754962847548-06ec7fc48de8?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Log cabin porch overlooking a Smoky Mountain ridge",
     ctaGrid: true,
     ctaHeadline: "See what we built around this list",
     ctaBody:

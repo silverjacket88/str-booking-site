@@ -8,7 +8,12 @@ export default function BlogCard({ post }: { post: BlogPost }) {
       href={`/blog/${post.slug}`}
       className="group block overflow-hidden rounded-lg border border-line bg-paper transition-colors hover:border-forest"
     >
-      <BlogHeroArt motif={post.heroMotif} className="aspect-[16/9] w-full" />
+      <BlogHeroArt
+        src={post.heroImage}
+        alt={post.heroImageAlt}
+        className="aspect-[16/9] w-full"
+        sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+      />
       <div className="p-5">
         <p className="text-xs font-semibold uppercase tracking-wider text-forest">
           {post.eyebrow}

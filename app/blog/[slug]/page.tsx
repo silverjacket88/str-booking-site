@@ -69,7 +69,11 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
           ← All posts
         </Link>
 
-        <BlogHeroArt motif={post.heroMotif} className="mt-4 aspect-[16/8] w-full rounded-lg" />
+        <BlogHeroArt
+          src={post.heroImage}
+          alt={post.heroImageAlt}
+          className="mt-4 aspect-[16/8] w-full rounded-lg"
+        />
 
         <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-forest">
           {post.eyebrow}

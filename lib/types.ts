@@ -87,9 +87,12 @@ export type BlogBlock =
       items: { label: string; title: string; text: string; relatedSlug?: string }[];
     }
   | { kind: "trailCards"; items: { name: string; pills: string[]; text: string }[] }
-  | { kind: "checklist"; items: { title: string; text: string }[] };
-
-export type BlogHeroMotif = "map" | "leaves" | "trail" | "hike" | "checklist";
+  | { kind: "checklist"; items: { title: string; text: string }[] }
+  | {
+      kind: "venueGroup";
+      category: string;
+      items: { name: string; text: string; pills?: string[] }[];
+    };
 
 export interface BlogPost {
   slug: string;
@@ -98,7 +101,8 @@ export interface BlogPost {
   excerpt: string;
   readTime: string;
   publishedAt: string;
-  heroMotif: BlogHeroMotif;
+  heroImage: string;
+  heroImageAlt: string;
   body: BlogBlock[];
   ctaHeadline: string;
   ctaBody: string;

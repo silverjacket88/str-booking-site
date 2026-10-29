@@ -21,7 +21,7 @@ export default function BlogIndexPage() {
     <div className="mx-auto max-w-7xl px-6 py-14">
       <p className="text-xs font-semibold uppercase tracking-wider text-forest">Blog</p>
       <h1 className="mt-2 font-display text-4xl tracking-tight text-ink md:text-5xl">
-        Local guides to <span className="italic">{market.name}, {market.state}</span>.
+        Local guides to <span className="italic">{market.towns.join(", ")}, {market.state}</span>.
       </h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Hiking, fall color timing, parking tags, and weekend plans - written by the team that

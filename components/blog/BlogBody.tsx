@@ -126,6 +126,35 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
               </div>
             );
 
+          case "venueGroup":
+            return (
+              <div key={i} className="border-t border-line pt-6 first:border-t-0 first:pt-0">
+                <p className="text-xs font-semibold uppercase tracking-wider text-forest">
+                  {block.category}
+                </p>
+                <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                  {block.items.map((venue) => (
+                    <div key={venue.name} className="rounded-lg border border-line bg-paper p-5">
+                      <p className="font-display text-lg tracking-tight text-ink">{venue.name}</p>
+                      {venue.pills && venue.pills.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {venue.pills.map((pill) => (
+                            <span
+                              key={pill}
+                              className="rounded-full bg-cream-dark px-2.5 py-1 text-xs text-ink-soft"
+                            >
+                              {pill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <p className="mt-3 text-sm leading-relaxed text-ink-soft">{venue.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+
           case "checklist":
             return (
               <div key={i} className="space-y-4 border-t border-line pt-6">
