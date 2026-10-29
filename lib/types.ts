@@ -77,3 +77,31 @@ export interface SearchFilters {
   checkOut?: string;
   sort?: "bedrooms-desc" | "bedrooms-asc" | "guests-desc";
 }
+
+export type BlogBlock =
+  | { kind: "p"; text: string; label?: string; lead?: boolean; note?: boolean }
+  | { kind: "pricingTiles"; items: { price: string; label: string; emphasized?: boolean }[] }
+  | { kind: "qa"; items: { q: string; a: string }[] }
+  | {
+      kind: "timeline";
+      items: { label: string; title: string; text: string; relatedSlug?: string }[];
+    }
+  | { kind: "trailCards"; items: { name: string; pills: string[]; text: string }[] }
+  | { kind: "checklist"; items: { title: string; text: string }[] };
+
+export type BlogHeroMotif = "map" | "leaves" | "trail" | "hike" | "checklist";
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  eyebrow: string;
+  excerpt: string;
+  readTime: string;
+  publishedAt: string;
+  heroMotif: BlogHeroMotif;
+  body: BlogBlock[];
+  ctaHeadline: string;
+  ctaBody: string;
+  ctaCabinSlug?: string;
+  ctaGrid?: boolean;
+}

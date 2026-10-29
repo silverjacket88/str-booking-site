@@ -1,7 +1,7 @@
 import { siteConfig } from "@/lib/config";
 import { market } from "@/lib/data/market";
 import { properties } from "@/lib/data/properties";
-import { Property } from "@/lib/types";
+import { BlogPost, Property } from "@/lib/types";
 
 // All structured data here is built directly from siteConfig / lib/data -
 // the same real facts (prices, ratings, review counts, amenities) already
@@ -108,6 +108,22 @@ export function propertyJsonLd(property: Property) {
     checkoutTime: property.checkOutTime,
     isAccessibleForFree: false,
     petsAllowed: property.petsAllowed,
+  };
+}
+
+export function blogPostingJsonLd(post: BlogPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${siteConfig.url}/blog/${post.slug}/#article`,
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    url: `${siteConfig.url}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: siteConfig.name },
+    publisher: { "@id": `${siteConfig.url}/#business` },
+    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
   };
 }
 

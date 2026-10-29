@@ -37,6 +37,7 @@ export const siteConfig = {
   nav: [
     { label: "Our Cabins", href: "/cabins" },
     { label: "Fun Facts", href: "/#fun-facts" },
+    { label: "Blog", href: "/blog" },
     { label: "Our Story", href: "/about" },
     { label: "Get in Touch", href: "/contact" },
   ],
