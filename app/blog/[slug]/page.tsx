@@ -8,7 +8,7 @@ import BlogBody from "@/components/blog/BlogBody";
 import BlogCta from "@/components/blog/BlogCta";
 import BlogCard from "@/components/blog/BlogCard";
 import StructuredData from "@/components/StructuredData";
-import { blogPostingJsonLd, breadcrumbJsonLd } from "@/lib/seo/structuredData";
+import { blogPostingJsonLd, blogFaqJsonLd, breadcrumbJsonLd } from "@/lib/seo/structuredData";
 
 export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
@@ -53,10 +53,12 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
   if (!post) notFound();
 
   const related = getRelatedPosts(post.slug);
+  const faqJsonLd = blogFaqJsonLd(post);
 
   return (
     <article className="mx-auto max-w-7xl px-6 py-10">
       <StructuredData data={blogPostingJsonLd(post)} />
+      {faqJsonLd && <StructuredData data={faqJsonLd} />}
       <StructuredData
         data={breadcrumbJsonLd([
           { name: "Home", url: siteConfig.url },

@@ -14,13 +14,16 @@ import LocalFunFacts from "@/components/LocalFunFacts";
 import WhereWeOperateHeading from "@/components/WhereWeOperateHeading";
 import OurCabinsHeading from "@/components/OurCabinsHeading";
 import PriceComparisonSection from "@/components/PriceComparisonSection";
+import BlogCard from "@/components/blog/BlogCard";
 import { market } from "@/lib/data/market";
 import { properties } from "@/lib/data/properties";
 import { reviews } from "@/lib/data/reviews";
+import { getSortedBlogPosts } from "@/lib/data/blog";
 import { siteConfig } from "@/lib/config";
 
 export default function HomePage() {
   const avgRating = properties.reduce((sum, p) => sum + p.rating, 0) / properties.length;
+  const latestPosts = getSortedBlogPosts().slice(0, 3);
 
   return (
     <>
@@ -153,6 +156,32 @@ export default function HomePage() {
           <div className="mt-10">
             <LocalFunFacts />
           </div>
+        </div>
+      </section>
+
+      {/* From the blog */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-forest">
+              From the blog
+            </p>
+            <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
+              Local guides, written by the team that hosts you.
+            </h2>
+          </div>
+          <Link
+            href="/blog"
+            className="whitespace-nowrap text-sm font-medium text-forest hover:underline"
+          >
+            Read the blog →
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latestPosts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
         </div>
       </section>
 

@@ -127,6 +127,24 @@ export function blogPostingJsonLd(post: BlogPost) {
   };
 }
 
+export function blogFaqJsonLd(post: BlogPost) {
+  const questions = post.body
+    .filter((block): block is Extract<typeof block, { kind: "qa" }> => block.kind === "qa")
+    .flatMap((block) => block.items);
+
+  if (questions.length === 0) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",

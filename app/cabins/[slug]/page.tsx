@@ -11,6 +11,8 @@ import StructuredData from "@/components/StructuredData";
 import { propertyJsonLd, breadcrumbJsonLd } from "@/lib/seo/structuredData";
 import { siteConfig } from "@/lib/config";
 import { market } from "@/lib/data/market";
+import { getRelatedPostsForProperty } from "@/lib/data/blog";
+import BlogCard from "@/components/blog/BlogCard";
 
 export function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }));
@@ -49,6 +51,7 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
   if (!property) notFound();
 
   const allAmenities = [...property.amenities, ...standardAmenities];
+  const relatedPosts = getRelatedPostsForProperty(property.slug);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10">
@@ -196,6 +199,22 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
               {property.cancellationPolicy}
             </p>
           </div>
+
+          {relatedPosts.length > 0 && (
+            <div className="mt-8 border-t border-line pt-8">
+              <h2 className="font-display text-2xl tracking-tight text-ink">
+                Plan your trip
+              </h2>
+              <p className="mt-2 text-sm text-ink-soft">
+                A few guides from our blog for the area around {property.name}.
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {relatedPosts.map((post) => (
+                  <BlogCard key={post.slug} post={post} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">

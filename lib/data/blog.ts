@@ -2,6 +2,97 @@ import { BlogPost } from "@/lib/types";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "things-to-do-pigeon-forge-gatlinburg",
+    title: "The Best Things to Do in Pigeon Forge & Gatlinburg (Beyond the Cabin)",
+    eyebrow: "Attractions Guide",
+    excerpt:
+      "From go-kart tracks and mountain coasters to Dollywood and the spots only locals bother with - here's how to fill the days between hikes.",
+    readTime: "6 min read",
+    publishedAt: "2026-11-12",
+    heroImage:
+      "https://images.unsplash.com/photo-1786352500091-8c03c5caf7f3?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "A mountain coaster cart overlooking Smoky Mountain ridgelines",
+    ctaCabinSlug: "take-me-to-the-river-cabin",
+    ctaHeadline: "Home base for your Pigeon Forge days",
+    ctaBody:
+      "Take Me To The River Cabin keeps you close enough to The Island and Dollywood for an easy drive, with a quiet riverbank to come back to afterward.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "Hiking and cabin time are the whole point of a Smokies trip, but everyone needs a rain day or a change of pace. Here's how we'd spend it, grouped by what you're actually after.",
+      },
+      {
+        kind: "venueGroup",
+        category: "Thrills for the kids",
+        items: [
+          {
+            name: "The Track",
+            pills: ["Wild Woody coaster", "Karts by age/height"],
+            text: "Home to Wild Woody, a three-story wooden go-kart and coaster hybrid, plus several kart tracks sorted by age and height so younger kids aren't stuck in the parking lot.",
+          },
+          {
+            name: "Adventure Raceway",
+            pills: ["3-story spiral", "Bumper boats"],
+            text: "An elevated wooden track with a three-story spiral, bumper boats, and karts that stay open into the evening.",
+          },
+          {
+            name: "Mountain coasters",
+            pills: ["Gravity-powered", "Several operators"],
+            text: "Pigeon Forge has multiple gravity-powered mountain coasters built into the hillsides, including the Pigeon Forge Racing Coaster - the first racing mountain coaster in the country, where two carts run side by side.",
+          },
+        ],
+      },
+      {
+        kind: "venueGroup",
+        category: "The big-name attractions",
+        items: [
+          {
+            name: "Dollywood",
+            pills: ["160 acres", "50+ rides & shows"],
+            text: "160 acres of rides, shows, and the Wildwood Grove family area, plus the separate Splash Country water park next door - worth a full day on its own.",
+          },
+          {
+            name: "Anakeesta",
+            pills: ["Mountaintop gondola", "6 attractions, 1 ticket"],
+            text: "A gondola ride up a Gatlinburg mountainside to six attractions under one ticket, including the Treetop Skywalk and AnaVista Tower.",
+          },
+          {
+            name: "The Island in Pigeon Forge",
+            pills: ["Free to walk", "200ft Ferris wheel"],
+            text: "Free to walk around - 40-plus shops, bumper cars, an arcade, the Alcatraz East Crime Museum, and the 200-foot Great Smoky Mountain Wheel lit up after dark.",
+          },
+        ],
+      },
+      {
+        kind: "venueGroup",
+        category: "Only the locals bother with",
+        items: [
+          {
+            name: "Greenbrier",
+            pills: ["Quiet park entrance", "Swimming holes"],
+            text: "A quieter entrance to the national park about 6 miles from Gatlinburg, with swimming holes and trailheads (Porters Creek, Ramsey Cascades) that stay far less crowded than Cades Cove.",
+          },
+          {
+            name: "Wears Valley",
+            pills: ["Low-key", "No Parkway traffic"],
+            text: "The low-key valley between Pigeon Forge and Townsend - open farmland and mountain views without the Parkway traffic.",
+          },
+          {
+            name: "Metcalf Bottoms & Tremont",
+            pills: ["Picnic & wading"],
+            text: "Peaceful, easy-to-reach picnic and wading spots inside the park that most first-time visitors drive right past.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Dollywood and Anakeesta both require tickets and shift their hours seasonally, so it's worth checking each park's own site before you build a day around one.",
+      },
+    ],
+  },
+  {
     slug: "where-to-eat-in-gatlinburg",
     title: "Where to Eat in Gatlinburg - A Local's Restaurant Guide",
     eyebrow: "Restaurant Guide",
@@ -383,5 +474,11 @@ export function getSortedBlogPosts(): BlogPost[] {
 export function getRelatedPosts(slug: string, limit = 3): BlogPost[] {
   return getSortedBlogPosts()
     .filter((p) => p.slug !== slug)
+    .slice(0, limit);
+}
+
+export function getRelatedPostsForProperty(propertySlug: string, limit = 3): BlogPost[] {
+  return getSortedBlogPosts()
+    .filter((p) => p.ctaCabinSlug === propertySlug || p.ctaGrid)
     .slice(0, limit);
 }
