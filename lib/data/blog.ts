@@ -2,6 +2,109 @@ import { BlogPost } from "@/lib/types";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "townsend-tn-quiet-side-of-the-smokies",
+    title: "Townsend, TN: The Quiet Side of the Smokies",
+    eyebrow: "Day Trip Guide",
+    excerpt:
+      "No traffic lights, no taffy shops - just Cades Cove, a five-star cave, and a river made for tubing. Here's why Townsend is worth the drive from your cabin.",
+    readTime: "5 min read",
+    publishedAt: "2026-11-26",
+    heroImage:
+      "https://images.unsplash.com/photo-1661288407022-a6a9e94d4da6?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "A quiet country road along Cades Cove with Smoky Mountain views",
+    ctaCabinSlug: "chasing-sunset-cabin",
+    ctaHeadline: "A quieter home base for your Townsend day",
+    ctaBody:
+      "Chasing Sunset Cabin keeps you close enough for an easy drive to Townsend, with a quiet porch to come back to after.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "Townsend sits on the quiet side of the park - no traffic lights, no mini-golf, no taffy machines in the window. If Pigeon Forge and Gatlinburg start to feel like a lot, it's about a 30-40 minute drive from Sevierville and worth the trip.",
+      },
+      {
+        kind: "venueGroup",
+        category: "What to do",
+        items: [
+          {
+            name: "Cades Cove (via the Townsend entrance)",
+            pills: ["11-mile loop", "Less traffic this way"],
+            text: "The same 11-mile loop road everyone drives for wildlife and early-settler history, but entering from the Townsend side means less backed-up traffic before you even reach the loop. Closed to cars on Wednesday mornings in season for cyclists and walkers.",
+          },
+          {
+            name: "Tuckaleechee Caverns",
+            pills: ["AAA Five-Star", "3 miles from downtown"],
+            text: "Tennessee's only AAA Five-Star cave attraction, about 3 miles from downtown Townsend. Guided tours walk through chandelier and totem-pole rock formations, well below the summer heat.",
+          },
+          {
+            name: "Little River & the Townsend Wye",
+            pills: ["Tubing", "Swimming"],
+            text: "Where the Little River and Middle Prong meet - smooth rock shelves, cool water, and Townsend's classic summer tubing and swimming spot, just inside the park boundary.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        label: "Worth knowing before you go:",
+        text: "Townsend has far fewer restaurants and shops than Pigeon Forge or Gatlinburg, so it's more of a day-trip stop than a full day - pair a morning at Tuckaleechee with an afternoon driving Cades Cove.",
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "If Townsend's pace is what you're after, Cosby - the park's other low-key entrance, on the opposite side near Gatlinburg - has the same kind of quiet trails and far fewer crowds.",
+      },
+    ],
+  },
+  {
+    slug: "wears-valley-tn-things-to-do",
+    title: "Wears Valley, TN: Ziplines, Horses, and the Valley Between Pigeon Forge and Townsend",
+    eyebrow: "Local Area Guide",
+    excerpt:
+      "Open farmland, mountain views, and none of the Parkway traffic - here's what to do in the valley locals call one of the Smokies' best-kept secrets.",
+    readTime: "5 min read",
+    publishedAt: "2026-11-19",
+    heroImage:
+      "https://images.unsplash.com/photo-1780728955928-2d5542bdf0cb?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "A farm valley between forested mountain ridges at sunset",
+    ctaCabinSlug: "the-wth-cabin",
+    ctaHeadline: "Close to the valley, close to everything else",
+    ctaBody:
+      "The WTH Cabin puts you minutes from Wears Valley Road, with Pigeon Forge and the park entrance both within easy reach.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "Wears Valley sits between Pigeon Forge and Townsend, and it's often called one of the Smokies' best-kept secrets - open farmland, mountain views, and almost none of the Parkway traffic.",
+      },
+      {
+        kind: "venueGroup",
+        category: "What to do",
+        items: [
+          {
+            name: "Wears Valley Zipline Adventures",
+            pills: ["Long course", "Half-day"],
+            text: "One of the longer zipline courses in the area, strung across the valley's hillsides - a solid half-day activity that doesn't require a park entrance.",
+          },
+          {
+            name: "CLIMB Works Smoky Mountains",
+            pills: ["Zipline", "Aerial bridges"],
+            text: "Zipline and aerial-bridge courses through the treetops, with off-road sections for a different pace than a straight zip run.",
+          },
+          {
+            name: "Horseback riding",
+            pills: ["Harper Bros. Mountain", "Waldens Creek Stables"],
+            text: "Harper Bros. Mountain and Waldens Creek Stables both run guided trail rides in the area - a few outfits even let you ride into the national park itself.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Wears Valley is mostly cabins and open land rather than restaurants and shops, so it's best paired with a day in Pigeon Forge or Townsend rather than visited on its own.",
+      },
+    ],
+  },
+  {
     slug: "things-to-do-pigeon-forge-gatlinburg",
     title: "The Best Things to Do in Pigeon Forge & Gatlinburg (Beyond the Cabin)",
     eyebrow: "Attractions Guide",
@@ -38,8 +141,8 @@ export const blogPosts: BlogPost[] = [
           },
           {
             name: "Mountain coasters",
-            pills: ["Gravity-powered", "Several operators"],
-            text: "Pigeon Forge has multiple gravity-powered mountain coasters built into the hillsides, including the Pigeon Forge Racing Coaster - the first racing mountain coaster in the country, where two carts run side by side.",
+            pills: ["Gravity-powered", "5+ in the area"],
+            text: "Pigeon Forge and Gatlinburg are covered in them: the Smoky Mountain Alpine Coaster and Rocky Top Mountain Coaster in Pigeon Forge, Ripley's Mountain Coaster and Moonshine Mountain Coaster in Gatlinburg, and SkyLand Ranch's coaster and canopy walks in Sevierville. Each one is a slightly different ride down the hillside.",
           },
         ],
       },
