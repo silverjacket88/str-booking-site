@@ -3,6 +3,7 @@ import Link from "next/link";
 import HeroVideoBackground from "@/components/HeroVideoBackground";
 import HeroQA from "@/components/HeroQA";
 import SearchWidget from "@/components/SearchWidget";
+import MobileBookingCta from "@/components/MobileBookingCta";
 import StatsBar from "@/components/StatsBar";
 import AmenityChips from "@/components/AmenityChips";
 import PropertyCard from "@/components/PropertyCard";
@@ -31,16 +32,16 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <HeroVideoBackground />
 
-        <div className="mx-auto max-w-7xl px-6 pb-40 pt-28 md:pt-36">
+        <div className="mx-auto max-w-7xl px-6 pb-24 pt-28 md:pb-16 md:pt-36">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream">
             {market.name}, {market.state}
           </p>
           <HeroQA />
         </div>
 
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="-mt-28 md:-mt-24">
-            <SearchWidget />
+        <div className="mx-auto max-w-7xl px-6 md:hidden">
+          <div className="-mt-10">
+            <MobileBookingCta />
           </div>
         </div>
 
