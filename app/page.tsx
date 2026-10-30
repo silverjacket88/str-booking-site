@@ -189,12 +189,22 @@ export default function HomePage() {
       {/* Reviews */}
       <section className="border-y border-line/60 bg-cream-dark py-16">
         <div className="mx-auto max-w-7xl px-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-            Why guests love us
-          </p>
-          <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
-            {`${avgRating.toFixed(2)} out of 5. Here's why.`}
-          </h2>
+          <div className="flex items-baseline justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-forest">
+                Why guests love us
+              </p>
+              <h2 className="mt-2 font-display text-3xl tracking-tight text-ink md:text-4xl">
+                {`${avgRating.toFixed(2)} out of 5. Here's why.`}
+              </h2>
+            </div>
+            <Link
+              href="/reviews"
+              className="hidden whitespace-nowrap text-sm text-forest hover:text-forest-dark sm:block"
+            >
+              See all reviews →
+            </Link>
+          </div>
           <div className="mt-10">
             <SwipeCarousel>
               {reviews

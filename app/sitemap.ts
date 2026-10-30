@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: siteConfig.url, changeFrequency: "weekly", priority: 1 },
     { url: `${siteConfig.url}/cabins`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteConfig.url}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${siteConfig.url}/reviews`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${siteConfig.url}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${siteConfig.url}/contact`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${siteConfig.url}/for-owners`, changeFrequency: "monthly", priority: 0.4 },

@@ -65,6 +65,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/reviews" className="text-ink-soft hover:text-forest">
+                  Reviews
+                </Link>
+              </li>
+              <li>
                 <a
                   href={siteConfig.ownerFunnelUrl}
                   target="_blank"
