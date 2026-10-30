@@ -2,6 +2,171 @@ import { BlogPost } from "@/lib/types";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "best-time-to-visit-smoky-mountains",
+    title: "The Best Time to Visit the Smoky Mountains: A Season-by-Season Guide",
+    eyebrow: "Local Timing Guide",
+    excerpt:
+      "Wildflowers in spring, tubing in summer, Dollywood lit up for Christmas - here's what each season actually looks like, so you can pick the trip you actually want.",
+    readTime: "5 min read",
+    publishedAt: "2026-12-17",
+    heroImage:
+      "https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "Sunset light over layered Smoky Mountain ridgelines",
+    ctaGrid: true,
+    ctaHeadline: "Whichever season you pick, there's a cabin for it",
+    ctaBody:
+      "A hot tub for chilly December nights, a riverbank for July, a porch for leaf season - browse all three and match the cabin to the trip.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "\"When should we come?\" is really several different questions - do you want wildflowers or waterfalls, tubing or Christmas lights, a quiet week or a festival weekend. There's no single best time to visit the Smokies, but there is a best time for the trip you're actually trying to take.",
+      },
+      {
+        kind: "timeline",
+        items: [
+          {
+            label: "Spring (March-May)",
+            title: "Wildflowers, waterfalls, and spring break crowds",
+            text: "Spring is when the park's waterfalls run fullest from snowmelt and rain, and wildflowers start carpeting the lower trails. Dollywood typically reopens for its new season in mid-March, which is also when spring break travel picks up - book early if you're coming the weeks around it. Weather swings widely this time of year, so pack for both 70-degree afternoons and chilly mornings.",
+          },
+          {
+            label: "Summer (June-August)",
+            title: "Tubing, long days, and peak hiking season",
+            text: "This is the park's busiest season and for good reason - long daylight hours, warm water for tubing on the Little River, and every trail and overlook open and accessible. Afternoon thunderstorms are common, so mornings are the better window for hiking. It's also prime time for Dollywood's Splash Country water park if the group wants a day off the trails.",
+          },
+          {
+            label: "Fall & Halloween (September-early November)",
+            title: "Foliage season, plus pumpkins and haunted attractions",
+            text: "Color rolls downhill over about six weeks - see our fall foliage timing guide for exactly when to book for your elevation of choice. Dollywood runs its Harvest Festival with Great Pumpkin LumiNights through the end of October, and Gatlinburg's haunted attractions (Ripley's Haunted Adventure, Mysterious Mansion) are open for anyone wanting a Halloween-season scare between hikes.",
+          },
+          {
+            label: "Thanksgiving week",
+            title: "A quieter week between two busy seasons",
+            text: "By Thanksgiving, the park's holiday lights are usually already up but the big Christmas-week crowds haven't arrived yet - a good window if you want festive without packed. Just know that restaurant waits and attraction hours shift around the holiday itself, so check ahead for Thanksgiving Day specifically.",
+          },
+          {
+            label: "Christmas & New Year's",
+            title: "Dollywood's Smoky Mountain Christmas and Gatlinburg's Winter Magic",
+            text: "Dollywood's Smoky Mountain Christmas runs from early November through early January with millions of lights across the park. In town, Gatlinburg's Winter Magic kicks off in early November with a street festival and nightly Trolley Ride of Lights running into the new year. Expect holiday-week crowds and book cabins well in advance if you want to be here for Christmas or New Year's itself.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Exact event dates shift year to year - we'll keep this updated, but always double-check current dates for Dollywood events and Gatlinburg's festival calendar before you lock in a trip built around them.",
+      },
+    ],
+  },
+  {
+    slug: "toughest-hikes-smoky-mountains",
+    title: "The Smokies' Toughest Hikes (For When Easy Isn't the Point)",
+    eyebrow: "Trail Guide",
+    excerpt:
+      "Our family hikes post is for an easy afternoon. These four are for the opposite end of the spectrum - real mileage, real elevation gain, and what to know before you start.",
+    readTime: "6 min read",
+    publishedAt: "2026-12-10",
+    heroImage:
+      "https://images.unsplash.com/photo-1781312993981-fbb6843bb21f?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "A rocky ridge trail leading toward a distant mountain summit",
+    ctaCabinSlug: "chasing-sunset-cabin",
+    ctaHeadline: "Start before sunrise, chase the sunset home",
+    ctaBody:
+      "These are full-day hikes. Chasing Sunset Cabin's porch is exactly where you want to land after one, hot tub included.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "Our family hikes post is for an easy afternoon with kids in tow. These four are for the opposite end of the spectrum - real distance, real elevation gain, and trails that reward hikers who come prepared rather than casual.",
+      },
+      {
+        kind: "trailCards",
+        items: [
+          {
+            name: "Mount LeConte via Alum Cave Trail",
+            pills: ["~11 miles round trip", "~2,800 ft gain", "Strenuous"],
+            text: "The classic route up one of the park's highest peaks, usually 5-7 hours round trip. Alum Cave Bluffs, about 4.4 miles round trip on its own, makes a solid shorter turnaround if you're not going all the way to the summit. Go the distance and you'll find LeConte Lodge near the top - a rustic, no-electricity lodge that books out roughly a year in advance.",
+          },
+          {
+            name: "Charlies Bunion via the Appalachian Trail",
+            pills: ["~8 miles round trip", "~1,640 ft gain", "Strenuous"],
+            text: "Starting from Newfound Gap, this route follows the Appalachian Trail out to a rocky outcrop with sweeping views back toward the park. It's a serious day hike, but one of the more straightforward ways to say you've hiked a stretch of the AT.",
+          },
+          {
+            name: "Ramsey Cascades",
+            pills: ["~8 miles round trip", "~2,200 ft gain", "Strenuous"],
+            text: "The trail to the tallest waterfall in the park - about 90-100 feet - and the steady climb makes it a genuine workout even before the final mile, which turns steep, rocky, and root-covered on the approach to the falls. Dogs and bikes aren't allowed on this one.",
+          },
+          {
+            name: "Chimney Tops",
+            pills: ["~4 miles round trip", "~1,400 ft gain", "Steep for its length"],
+            text: "The shortest trail on this list but don't let that fool you - it's a steep climb packed into a short distance. Worth knowing before you go: the final pinnacle has been closed since the 2016 wildfire and remains closed today. The park built a new overlook short of the old summit, which is now the official end of the trail.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        label: "Before you go:",
+        text: "Cell service is unreliable to nonexistent on all four of these trails, so download maps ahead of time and tell someone your plan. Start early - afternoon thunderstorms are common, especially in summer, and these are long enough days that an early start matters. And check the park's current trail conditions page before you commit: trails in this park do close for storm damage and rehab work from time to time, sometimes for months, so it's worth a quick check the week of your hike.",
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Looking for something shorter with the family? Our family hikes near Sevierville post covers four easier trails, no technical climbing required.",
+      },
+    ],
+  },
+  {
+    slug: "cosby-tn-quiet-smokies-entrance",
+    title: "Cosby, TN: The Smokies' Other Quiet Entrance",
+    eyebrow: "Day Trip Guide",
+    excerpt:
+      "No crowds, a genuinely good waterfall hike, and a drive most visitors never make. Here's what's worth the detour to Cosby.",
+    readTime: "4 min read",
+    publishedAt: "2026-12-03",
+    heroImage:
+      "https://images.unsplash.com/photo-1595206824341-35200e6ed939?w=1600&q=80&auto=format&fit=crop",
+    heroImageAlt: "A quiet waterfall tumbling through a green forest",
+    ctaCabinSlug: "take-me-to-the-river-cabin",
+    ctaHeadline: "A creekside hike, then a creekside porch",
+    ctaBody:
+      "Take Me To The River Cabin is an easy drive from the Cosby side of the park - come back from Hen Wallow Falls to your own stretch of water.",
+    body: [
+      {
+        kind: "p",
+        lead: true,
+        text: "Mention Cosby to most Gatlinburg visitors and you'll get a blank look. It sits on the park's northeastern edge, reached by its own quiet entrance off TN-32 rather than through downtown Gatlinburg - plan on an extra 20-30 minutes past Gatlinburg to get there, and you'll have one of the park's better waterfall hikes with a fraction of the crowds.",
+      },
+      {
+        kind: "venueGroup",
+        category: "What to do",
+        items: [
+          {
+            name: "Hen Wallow Falls via Gabes Mountain Trail",
+            pills: ["~4.4 miles round trip", "90-ft waterfall", "Fewer crowds"],
+            text: "The main reason to make the drive: a roughly 4.4-mile round-trip hike from the Cosby Campground to a 90-foot waterfall, on a trail that sees a fraction of the traffic you'd find on the Gatlinburg side of the park.",
+          },
+          {
+            name: "Cosby Campground & Picnic Area",
+            pills: ["Trailhead", "Shaded picnic sites"],
+            text: "The starting point for Gabes Mountain Trail and several other backcountry routes, with a shaded picnic area if you'd rather just bring lunch and sit by the creek than hike.",
+          },
+          {
+            name: "The drive in on TN-32",
+            pills: ["Scenic", "Quiet"],
+            text: "No traffic lights, no outlet malls - just a winding mountain road in through farmland and forest. It's a different first impression of the Smokies than the Parkway strip, and part of why this side of the park feels so different.",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "Cosby and Townsend are the park's two low-key entrances - opposite sides of the Smokies, same quiet-trails, fewer-crowds appeal. If Cosby's hike leaves you wanting more of the same, our Townsend guide covers the other side.",
+      },
+    ],
+  },
+  {
     slug: "townsend-tn-quiet-side-of-the-smokies",
     title: "Townsend, TN: The Quiet Side of the Smokies",
     eyebrow: "Day Trip Guide",
@@ -478,9 +643,9 @@ export const blogPosts: BlogPost[] = [
         kind: "trailCards",
         items: [
           {
-            name: "Laurel Falls Trail",
-            pills: ["Paved", "Stroller-friendly", "Go early"],
-            text: "The most popular easy hike in the park for a reason: a paved path leading to an 80-foot waterfall, manageable for most fitness levels and strollers with sturdy wheels. Because it's paved and popular, it also means crowds - go early, especially on weekends.",
+            name: "Metcalf Bottoms Trail to Little Greenbrier School",
+            pills: ["~1.2 miles round trip", "Flat", "Historic schoolhouse"],
+            text: "An easy, mostly flat walk from the Metcalf Bottoms picnic area to a one-room schoolhouse built in 1882, still standing in a clearing in the woods. A good pick for an easy half-day with young kids, with a picnic area at the trailhead if you want to make lunch part of the trip.",
           },
           {
             name: "Cataract Falls",
@@ -503,6 +668,11 @@ export const blogPosts: BlogPost[] = [
         kind: "p",
         label: "A few things worth knowing before you go:",
         text: "cell service is unreliable to nonexistent inside the park, so download any trail maps ahead of time. Afternoon thunderstorms are common in summer, so mornings are almost always the better call. And bring more water than you think you'll need - even an easy trail feels longer in Tennessee humidity.",
+      },
+      {
+        kind: "p",
+        note: true,
+        text: "You'll notice Laurel Falls Trail - usually the first easy hike anyone recommends - isn't on this list. It's been closed for rehabilitation work, so we swapped in Metcalf Bottoms above instead. Check the park's current trail conditions page before your trip in case that's changed by the time you visit.",
       },
       {
         kind: "p",
