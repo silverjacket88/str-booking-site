@@ -85,15 +85,16 @@ export default function ForOwnersPage() {
       <section className="bg-forest py-20 text-cream">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-cream/80">
-            For property owners
+            For owners - and those who&apos;d like to be
           </p>
           <h1 className="mt-3 font-display text-4xl tracking-tight md:text-5xl">
-            Want to earn more from your {market.name} rental?
+            Ever pictured owning your own corner of the Smokies?
           </h1>
           <p className="mt-4 text-lg text-cream/90">
-            We only manage a handful of cabins, all in {market.name} - pricing, guests,
-            maintenance, and deposits, done by people who live here. Tell us a bit about your
-            property and we&apos;ll follow up with a projected revenue estimate - no obligation.
+            From first-time buyers who fell for the mountains on a stay with us, to owners ready
+            for more hands-on management - we keep it small on purpose, with a local team that
+            treats every home like their own. Still looking for the right property? We work with
+            a trusted local agent who can help you find it.
           </p>
           <a
             href={siteConfig.ownerFunnelUrl}
