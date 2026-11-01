@@ -103,6 +103,13 @@ export default function ForOwnersPage() {
           >
             Request my free review
           </a>
+          <p className="mt-4 text-xs text-cream/70">
+            Prefer to talk it through? Call {siteConfig.supportPhoneDisplay} or email{" "}
+            <a href={`mailto:${siteConfig.ownerEmail}`} className="text-cream underline hover:text-cream/80">
+              {siteConfig.ownerEmail}
+            </a>
+            .
+          </p>
         </div>
       </section>
 
