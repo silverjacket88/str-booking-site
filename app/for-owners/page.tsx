@@ -18,7 +18,7 @@ const benefits = [
     body: "24/7 messaging, screening, and support so you're never the one fielding a 2 AM text about the wifi password.",
   },
   {
-    title: "We live here - maintenance is local",
+    title: "Our team is local - maintenance is too",
     body: "We're not dispatching a national call center. If something breaks, it's fixed by someone who lives ten minutes away.",
   },
   {
@@ -27,7 +27,7 @@ const benefits = [
   },
   {
     title: "Multi-channel distribution",
-    body: "Listed on Airbnb, Vrbo, and Booking.com, plus our own direct-booking site where you keep more of every reservation.",
+    body: "Listed on Airbnb and Vrbo, plus our own direct-booking site where you keep more of every reservation.",
   },
   {
     title: "Full-service onboarding",
