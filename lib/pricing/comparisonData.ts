@@ -34,7 +34,7 @@ export interface ComparisonResult {
 // the "checked at" date shown in the UI makes clear it's a snapshot.
 export const getPriceComparison = unstable_cache(
   getPriceComparisonUncached,
-  ["price-comparison-next-month"],
+  ["price-comparison-cascading-months"],
   { revalidate: 3600 }
 );
 
@@ -70,5 +70,5 @@ async function getPriceComparisonUncached(): Promise<ComparisonResult | null> {
     };
   }
 
-  return null; // nothing available anywhere next month (shouldn't normally happen)
+  return null; // nothing available on all 3 cabins in the next 12 months (shouldn't normally happen)
 }

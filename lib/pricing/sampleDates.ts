@@ -16,28 +16,25 @@ export interface DateCandidate {
 }
 
 /**
- * Candidate 3-night stays in the calendar month right after `today`:
- * every Friday-to-Monday weekend first (in date order), then every
- * Monday-to-Thursday weekday stretch as a fallback if no weekend in that
- * month turns out to be available. Real availability is checked
- * separately (see getFirstAvailableSample) - this just builds the
- * candidate list to try, in priority order.
+ * Candidate 3-night stays in a single calendar month: every Friday-to-Monday
+ * weekend first (in date order), then every Monday-to-Thursday weekday
+ * stretch as a fallback if no weekend in that month turns out to be
+ * available. Real availability is checked separately (see
+ * getFirstAvailableSample) - this just builds the candidate list to try,
+ * in priority order.
  */
-export function buildNextMonthCandidates(today: Date = new Date()): DateCandidate[] {
-  const year = today.getUTCFullYear();
-  const month = today.getUTCMonth();
-  const nextMonthStart = new Date(Date.UTC(year, month + 1, 1));
-  const nextMonthEnd = new Date(Date.UTC(year, month + 2, 1)); // exclusive
+function buildMonthCandidates(monthStart: Date): DateCandidate[] {
+  const monthEnd = new Date(Date.UTC(monthStart.getUTCFullYear(), monthStart.getUTCMonth() + 1, 1)); // exclusive
 
   const weekends: DateCandidate[] = [];
   const weekdays: DateCandidate[] = [];
 
-  for (let d = new Date(nextMonthStart); d < nextMonthEnd; d = addDays(d, 1)) {
+  for (let d = new Date(monthStart); d < monthEnd; d = addDays(d, 1)) {
     const dayOfWeek = d.getUTCDay(); // 0=Sun..6=Sat
     if (dayOfWeek === 5) {
       // Friday -> Monday (3 nights)
       const checkOut = addDays(d, 3);
-      if (checkOut < nextMonthEnd) {
+      if (checkOut < monthEnd) {
         weekends.push({
           checkIn: toISO(d),
           checkOut: toISO(checkOut),
@@ -49,7 +46,7 @@ export function buildNextMonthCandidates(today: Date = new Date()): DateCandidat
     if (dayOfWeek === 1) {
       // Monday -> Thursday (3 nights)
       const checkOut = addDays(d, 3);
-      if (checkOut < nextMonthEnd) {
+      if (checkOut < monthEnd) {
         weekdays.push({
           checkIn: toISO(d),
           checkOut: toISO(checkOut),
@@ -61,4 +58,28 @@ export function buildNextMonthCandidates(today: Date = new Date()): DateCandidat
   }
 
   return [...weekends, ...weekdays];
+}
+
+/**
+ * Candidate 3-night stays starting with the calendar month right after
+ * `today` and cascading forward month-by-month (up to `monthsAhead` months)
+ * so a caller can keep trying later months instead of giving up when the
+ * immediate next month is fully booked. Candidates are grouped by month, in
+ * chronological order; within each month, weekends are tried before
+ * weekdays (see buildMonthCandidates).
+ */
+export function buildNextMonthCandidates(
+  today: Date = new Date(),
+  monthsAhead: number = 12
+): DateCandidate[] {
+  const year = today.getUTCFullYear();
+  const month = today.getUTCMonth();
+
+  const candidates: DateCandidate[] = [];
+  for (let offset = 1; offset <= monthsAhead; offset++) {
+    const monthStart = new Date(Date.UTC(year, month + offset, 1));
+    candidates.push(...buildMonthCandidates(monthStart));
+  }
+
+  return candidates;
 }

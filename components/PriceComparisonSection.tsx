@@ -21,7 +21,7 @@ function formatDateRange(checkIn: string, checkOut: string): string {
 
 export default async function PriceComparisonSection() {
   const comparison = await getPriceComparison();
-  if (!comparison) return null; // nothing available anywhere next month - skip rather than show broken data
+  if (!comparison) return null; // nothing available on all 3 cabins in the next 12 months - skip rather than show broken data
 
   const { checkIn, checkOut, nights, checkedAt, cabins } = comparison;
 
