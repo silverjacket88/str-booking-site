@@ -92,13 +92,16 @@ export default function ForOwnersPage() {
           </h1>
           <p className="mt-4 text-lg text-cream/90">
             We only manage a handful of cabins, all in {market.name} - pricing, guests,
-            maintenance, and deposits, done by people who live here.
+            maintenance, and deposits, done by people who live here. Tell us a bit about your
+            property and we&apos;ll follow up with a projected revenue estimate - no obligation.
           </p>
           <a
-            href="#rental-review"
+            href={siteConfig.ownerFunnelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-8 inline-block rounded-full bg-cream px-7 py-3 text-sm font-medium text-forest-dark shadow-[0_8px_20px_-8px_rgba(0,0,0,0.35)] hover:bg-cream-dark"
           >
-            Get a free rental review
+            Request my free review
           </a>
         </div>
       </section>
@@ -144,39 +147,6 @@ export default function ForOwnersPage() {
               </div>
             );
           })}
-        </div>
-      </section>
-
-      <section id="rental-review" className="border-t border-line/60 bg-cream-dark/50 py-16">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 className="font-display text-3xl tracking-tight text-ink md:text-4xl">
-            Get a free rental income review.
-          </h2>
-          <p className="mt-3 text-ink-soft">
-            Tell us a bit about your property in {market.name}{" "}
-            and we&apos;ll follow up with a projected revenue estimate - no obligation.
-          </p>
-          <div className="mt-8 rounded-lg border border-line bg-paper p-8 text-center">
-            <p className="text-ink-soft">
-              Tell us about your property and we&apos;ll follow up with a projected revenue
-              estimate.
-            </p>
-            <a
-              href={siteConfig.ownerFunnelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-forest px-7 py-3 text-sm font-medium text-cream shadow-[0_8px_20px_-8px_rgba(63,74,56,0.55)] hover:bg-forest-dark"
-            >
-              Request my free review →
-            </a>
-          </div>
-          <p className="mt-6 text-xs text-ink-soft">
-            Prefer to talk it through? Call {siteConfig.supportPhoneDisplay} or email{" "}
-            <a href={`mailto:${siteConfig.ownerEmail}`} className="text-forest hover:underline">
-              {siteConfig.ownerEmail}
-            </a>
-            .
-          </p>
         </div>
       </section>
     </div>
